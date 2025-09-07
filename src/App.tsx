@@ -8,20 +8,15 @@ import { AppProvider } from './contexts/AppContext';
 import Layout from './components/layout/Layout';
 import HomePage from './components/features/HomePage';
 import AboutPage from './components/features/AboutPage';
-import BookingPage from './components/features/BookingPage';
+import ServicesPage from './components/features/ServicesPage';
 import ContactPage from './components/features/ContactPage';
 import ErrorBoundary from './components/ui/ErrorBoundary';
 import { useApp } from './contexts/AppContext';
-import { useWebVitals, useMemoryMonitor } from './hooks/usePerformance';
 
 // Router component (simplified for this example)
 const AppRouter: React.FC = () => {
   const { state } = useApp();
   const { activeTab } = state;
-
-  // Monitor performance in development
-  useWebVitals();
-  useMemoryMonitor();
 
   const renderPage = () => {
     switch (activeTab) {
@@ -29,8 +24,8 @@ const AppRouter: React.FC = () => {
         return <HomePage />;
       case 'about':
         return <AboutPage />;
-      case 'booking':
-        return <BookingPage />;
+      case 'services':
+        return <ServicesPage />;
       case 'contact':
         return <ContactPage />;
       default:

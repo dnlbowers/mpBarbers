@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer, useCallback } from 'react';
-import type { NavigationTab, BookingFormData, ContactFormData } from '../types';
+import type { NavigationTab, ContactFormData } from '../types';
 
 /**
  * Application State Interface
@@ -11,7 +11,6 @@ import type { NavigationTab, BookingFormData, ContactFormData } from '../types';
 interface AppState {
   readonly activeTab: NavigationTab;
   readonly mobileMenuOpen: boolean;
-  readonly bookingData: BookingFormData;
   readonly contactData: ContactFormData;
   readonly loading: boolean;
   readonly error: string | null;
@@ -28,11 +27,9 @@ type AppAction =
   | { type: 'SET_ACTIVE_TAB'; payload: NavigationTab }
   | { type: 'TOGGLE_MOBILE_MENU' }
   | { type: 'CLOSE_MOBILE_MENU' }
-  | { type: 'UPDATE_BOOKING_DATA'; payload: Partial<BookingFormData> }
   | { type: 'UPDATE_CONTACT_DATA'; payload: Partial<ContactFormData> }
   | { type: 'SET_LOADING'; payload: boolean }
   | { type: 'SET_ERROR'; payload: string | null }
-  | { type: 'RESET_BOOKING_DATA' }
   | { type: 'RESET_CONTACT_DATA' };
 
 /**
@@ -45,15 +42,6 @@ type AppAction =
 const initialState: AppState = {
   activeTab: 'home',
   mobileMenuOpen: false,
-  bookingData: {
-    service: '',
-    date: '',
-    time: '',
-    fullName: '',
-    email: '',
-    phoneNumber: '',
-    specialRequests: '',
-  },
   contactData: {
     name: '',
     email: '',
@@ -96,15 +84,6 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
         mobileMenuOpen: false,
       };
     
-    case 'UPDATE_BOOKING_DATA':
-      return {
-        ...state,
-        bookingData: {
-          ...state.bookingData,
-          ...action.payload,
-        },
-      };
-    
     case 'UPDATE_CONTACT_DATA':
       return {
         ...state,
@@ -125,12 +104,6 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
         ...state,
         error: action.payload,
         loading: false,
-      };
-    
-    case 'RESET_BOOKING_DATA':
-      return {
-        ...state,
-        bookingData: initialState.bookingData,
       };
     
     case 'RESET_CONTACT_DATA':
@@ -156,11 +129,9 @@ interface AppContextValue {
   readonly setActiveTab: (tab: NavigationTab) => void;
   readonly toggleMobileMenu: () => void;
   readonly closeMobileMenu: () => void;
-  readonly updateBookingData: (data: Partial<BookingFormData>) => void;
   readonly updateContactData: (data: Partial<ContactFormData>) => void;
   readonly setLoading: (loading: boolean) => void;
   readonly setError: (error: string | null) => void;
-  readonly resetBookingData: () => void;
   readonly resetContactData: () => void;
 }
 
@@ -223,15 +194,6 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   }, []);
 
   /**
-   * Updates booking form data
-   * @description Merges partial booking data updates while preserving existing form state
-   * for progressive form completion and data persistence
-   */
-  const updateBookingData = useCallback((data: Partial<BookingFormData>): void => {
-    dispatch({ type: 'UPDATE_BOOKING_DATA', payload: data });
-  }, []);
-
-  /**
    * Updates contact form data
    * @description Merges partial contact data updates for form state management
    */
@@ -256,14 +218,6 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   }, []);
 
   /**
-   * Resets booking form data to initial state
-   * @description Clears all booking form data for new booking sessions
-   */
-  const resetBookingData = useCallback((): void => {
-    dispatch({ type: 'RESET_BOOKING_DATA' });
-  }, []);
-
-  /**
    * Resets contact form data to initial state
    * @description Clears all contact form data after successful submission
    */
@@ -276,11 +230,9 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     setActiveTab,
     toggleMobileMenu,
     closeMobileMenu,
-    updateBookingData,
     updateContactData,
     setLoading,
     setError,
-    resetBookingData,
     resetContactData,
   };
 

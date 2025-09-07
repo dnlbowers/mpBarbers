@@ -8,7 +8,6 @@ import { useApp } from '../../contexts/AppContext';
 import { SERVICES, TESTIMONIALS, APP_CONFIG } from '../../constants';
 import { formatPrice, formatDuration } from '../../utils';
 import { useSEO, useStructuredData, SEO_CONFIGS, BUSINESS_STRUCTURED_DATA } from '../../hooks/useSEO';
-import { usePerformanceMonitor, useAnalytics } from '../../hooks/usePerformance';
 import Button from '../ui/Button';
 import Card from '../ui/Card';
 import styles from './css/HomePage.module.css';
@@ -20,21 +19,15 @@ const HomePage: React.FC = () => {
   // SEO optimization
   useSEO(SEO_CONFIGS.home);
   useStructuredData(BUSINESS_STRUCTURED_DATA);
-  
-  // Performance monitoring
-  const { startRender, endRender } = usePerformanceMonitor('HomePage');
-  const { trackPageView, trackButtonClick } = useAnalytics();
 
-  React.useEffect(() => {
-    startRender();
-    trackPageView('home');
-    return endRender;
-  }, [startRender, endRender, trackPageView]);
+  // Memoize handlers to prevent unnecessary re-renders
+  const handleMainCTAClick = React.useCallback(() => {
+    window.open('https://www.fresha.com/a/mp-barbershop-birkirkara-triq-il-karmnu-birkirkara-atsvpl0i/booking?cartId=3584a3ab-5887-4986-a1f9-f6a960c7b8a5', '_blank');
+  }, []);
 
-  const handleBookingClick = () => {
-    trackButtonClick('book_appointment', 'hero_section');
-    setActiveTab('booking');
-  };
+  const handleViewServicesClick = React.useCallback(() => {
+    setActiveTab('services');
+  }, [setActiveTab]);
 
   return (
     <div>
@@ -53,8 +46,8 @@ const HomePage: React.FC = () => {
           </p>
           <Button 
             size="lg"
-            onClick={handleBookingClick}
-            aria-label="Book your appointment now"
+            onClick={handleMainCTAClick}
+            aria-label="Book your appointment on Fresha (opens in new tab)"
           >
             BOOK YOUR CUT
           </Button>
@@ -77,14 +70,14 @@ const HomePage: React.FC = () => {
                 variant="outlined"
                 hover
                 className={`text-center cursor-pointer ${styles.serviceCard}`}
-                onClick={handleBookingClick}
+                onClick={handleViewServicesClick}
                 role="button"
                 tabIndex={0}
-                aria-label={`Book ${service.name} - ${formatPrice(service.price)}`}
+                aria-label={`View ${service.name} details and pricing`}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    handleBookingClick();
+                    handleViewServicesClick();
                   }
                 }}
               >
@@ -108,8 +101,8 @@ const HomePage: React.FC = () => {
           <div className="text-center mt-8">
             <Button
               variant="ghost"
-              onClick={handleBookingClick}
-              aria-label="View all services and book appointment"
+              onClick={handleViewServicesClick}
+              aria-label="View all services and pricing"
             >
               View All Services →
             </Button>
@@ -187,4 +180,4 @@ const HomePage: React.FC = () => {
   );
 };
 
-export default HomePage;
+export default React.memo(HomePage);

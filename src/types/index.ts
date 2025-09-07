@@ -82,23 +82,13 @@ export interface ContactInfo {
 }
 
 // Enums and Union Types
-export type ServiceCategory = 'haircut' | 'beard' | 'styling' | 'kids';
+export type ServiceCategory = 'haircut' | 'beard' | 'styling' | 'kids' | 'extra';
 
-export type NavigationTab = 'home' | 'about' | 'booking' | 'contact';
+export type NavigationTab = 'home' | 'about' | 'services' | 'contact';
 
 export type BookingStep = 'service' | 'datetime' | 'details' | 'confirmation';
 
 // Form Types
-export interface BookingFormData {
-  service: string;
-  date: string;
-  time: string;
-  fullName: string;
-  email: string;
-  phoneNumber: string;
-  specialRequests: string;
-}
-
 export interface ContactFormData {
   name: string;
   email: string;

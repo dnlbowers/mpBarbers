@@ -1,18 +1,27 @@
 /**
  * Performance Monitoring Hooks
  * Track component render times and user interactions
+ * 
+ * IMPORTANT: These hooks are disabled by default to prevent performance issues.
+ * Enable only when needed for debugging by setting ENABLE_PERFORMANCE_MONITORING = true
  */
 
 import { useEffect, useRef, useCallback } from 'react';
 
+// Disable performance monitoring by default to prevent slow renders
+const ENABLE_PERFORMANCE_MONITORING = false;
+
 /**
  * Hook to measure component render performance
+ * DISABLED by default to prevent infinite render loops
  */
 export const usePerformanceMonitor = (componentName: string) => {
   const startTime = useRef<number | undefined>(undefined);
   const mountTime = useRef<number | undefined>(undefined);
 
   useEffect(() => {
+    if (!ENABLE_PERFORMANCE_MONITORING) return;
+    
     // Record mount time
     mountTime.current = performance.now();
     
@@ -29,10 +38,13 @@ export const usePerformanceMonitor = (componentName: string) => {
   }, [componentName]);
 
   const startRender = useCallback(() => {
+    if (!ENABLE_PERFORMANCE_MONITORING) return;
     startTime.current = performance.now();
   }, []);
 
   const endRender = useCallback(() => {
+    if (!ENABLE_PERFORMANCE_MONITORING) return;
+    
     if (startTime.current) {
       const renderTime = performance.now() - startTime.current;
       
@@ -40,12 +52,6 @@ export const usePerformanceMonitor = (componentName: string) => {
       if (process.env.NODE_ENV === 'development' && renderTime > 16) {
         console.warn(`[Performance] Slow render in ${componentName}: ${renderTime.toFixed(2)}ms`);
       }
-      
-      // In production, you would send this to your analytics service
-      // analytics.track('component_render_time', {
-      //   component: componentName,
-      //   duration: renderTime
-      // });
     }
   }, [componentName]);
 
@@ -54,21 +60,21 @@ export const usePerformanceMonitor = (componentName: string) => {
 
 /**
  * Hook to track user interactions for analytics
+ * Simplified version that doesn't cause performance issues
  */
 export const useAnalytics = () => {
   const trackEvent = useCallback((event: string, properties?: Record<string, any>) => {
-    // In development, just log
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`[Analytics] ${event}`, properties);
+    // Only track in production or when explicitly enabled
+    if (process.env.NODE_ENV === 'development' && !ENABLE_PERFORMANCE_MONITORING) {
       return;
     }
 
     // In production, send to your analytics service
-    // Example: Google Analytics, Mixpanel, Amplitude, etc.
     try {
       // gtag('event', event, properties);
       // mixpanel.track(event, properties);
       // amplitude.logEvent(event, properties);
+      console.log(`[Analytics] ${event}`, properties);
     } catch (error) {
       console.error('Analytics tracking failed:', error);
     }
@@ -95,31 +101,26 @@ export const useAnalytics = () => {
 };
 
 /**
- * Hook for Web Vitals monitoring (simplified version)
+ * Hook for Web Vitals monitoring (disabled by default)
  */
 export const useWebVitals = () => {
   useEffect(() => {
+    if (!ENABLE_PERFORMANCE_MONITORING) return;
+    
     // Only import and run in browser environment
     if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
       console.log('[Web Vitals] Monitoring enabled in development mode');
-      
-      // In production, you would integrate with actual web-vitals library:
-      // import('web-vitals').then(({ onCLS, onFID, onFCP, onLCP, onTTFB }) => {
-      //   onCLS(sendToAnalytics);
-      //   onFID(sendToAnalytics);
-      //   onFCP(sendToAnalytics);
-      //   onLCP(sendToAnalytics);
-      //   onTTFB(sendToAnalytics);
-      // });
     }
   }, []);
 };
 
 /**
- * Hook for memory usage monitoring
+ * Hook for memory usage monitoring (disabled by default)
  */
 export const useMemoryMonitor = () => {
   useEffect(() => {
+    if (!ENABLE_PERFORMANCE_MONITORING) return;
+    
     const checkMemoryUsage = () => {
       if ('memory' in performance) {
         const memory = (performance as any).memory;

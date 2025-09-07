@@ -10,45 +10,104 @@ import type { Service, BusinessHours, ContactInfo, TeamMember, Testimonial } fro
  * @readonly Immutable service definitions prevent accidental modifications
  */
 export const SERVICES: readonly Service[] = [
+  // Hair Services
   {
-    id: 'classic-cut',
-    name: 'Classic Cut',
-    price: 35,
+    id: 'skin-fade',
+    name: 'Skin fade',
+    price: 12,
     duration: 30,
-    description: 'Traditional haircut with modern precision',
+    description: 'Professional skin fade haircut',
     category: 'haircut',
   },
   {
-    id: 'beard-trim',
-    name: 'Beard Trim',
-    price: 25,
-    duration: 20,
-    description: 'Professional beard shaping and trimming',
-    category: 'beard',
-  },
-  {
-    id: 'cut-and-beard',
-    name: 'Cut & Beard',
-    price: 55,
-    duration: 45,
-    description: 'Complete grooming package',
-    category: 'styling',
-  },
-  {
-    id: 'hot-shave',
-    name: 'Hot Shave',
-    price: 40,
+    id: 'scissor-cut',
+    name: 'Scissor cut',
+    price: 14,
     duration: 30,
-    description: 'Traditional hot towel shave experience',
+    description: 'Classic scissor cut styling',
+    category: 'haircut',
+  },
+  {
+    id: 'kids-cut-under-12',
+    name: 'Kids Cut (under 12)',
+    price: 10,
+    duration: 30,
+    description: 'Gentle haircuts for children under 12',
+    category: 'kids',
+  },
+  // Beard Services
+  {
+    id: 'beard-grooming',
+    name: 'Beard grooming',
+    price: 6,
+    duration: 15,
+    description: 'Professional beard trimming and shaping',
     category: 'beard',
   },
   {
-    id: 'kids-cut',
-    name: 'Kids Cut',
-    price: 25,
-    duration: 20,
-    description: 'Gentle haircuts for children',
-    category: 'kids',
+    id: 'hot-towel-beard-grooming',
+    name: 'Hot towel beard grooming',
+    price: 8,
+    duration: 15,
+    description: 'Beard grooming with relaxing hot towel treatment',
+    category: 'beard',
+  },
+  {
+    id: 'hot-towel-beard-clean-shave',
+    name: 'Hot towel beard clean shave',
+    price: 8,
+    duration: 15,
+    description: 'Traditional hot towel clean shave experience',
+    category: 'beard',
+  },
+  // Extra Services
+  {
+    id: 'shampoo',
+    name: 'Shampoo',
+    price: 3,
+    duration: 5,
+    description: 'Professional hair wash and conditioning',
+    category: 'extra',
+  },
+  {
+    id: 'eyebrows-waxing',
+    name: 'Eyebrows waxing',
+    price: 3,
+    duration: 5,
+    description: 'Precise eyebrow shaping with wax',
+    category: 'extra',
+  },
+  {
+    id: 'ear-waxing',
+    name: 'Ear waxing',
+    price: 3,
+    duration: 5,
+    description: 'Clean ear hair removal service',
+    category: 'extra',
+  },
+  {
+    id: 'nose-waxing',
+    name: 'Nose waxing',
+    price: 3,
+    duration: 5,
+    description: 'Professional nose hair removal',
+    category: 'extra',
+  },
+  {
+    id: 'complete-waxing-service',
+    name: 'Complete waxing service',
+    price: 7,
+    duration: 10,
+    description: 'Comprehensive facial hair grooming',
+    category: 'extra',
+  },
+  {
+    id: 'black-mask',
+    name: 'Black mask',
+    price: 5,
+    duration: 5,
+    description: 'Deep cleansing black mask treatment',
+    category: 'extra',
   },
 ] as const;
 
@@ -222,7 +281,7 @@ export const APP_CONFIG = {
 export const NAVIGATION_ITEMS = [
   { key: 'home', label: 'Home', ariaLabel: 'Go to home page' },
   { key: 'about', label: 'About', ariaLabel: 'Learn about our team and services' },
-  { key: 'booking', label: 'Book Now', ariaLabel: 'Book an appointment online' },
+  { key: 'services', label: 'Services', ariaLabel: 'View our services and pricing' },
   { key: 'contact', label: 'Contact', ariaLabel: 'View contact information and location' },
 ] as const;
 
@@ -237,7 +296,7 @@ export const NAVIGATION_ITEMS = [
  */
 export const SERVICE_CATEGORIES = {
   haircut: {
-    label: 'Hair Cuts',
+    label: 'Hair Services',
     description: 'Professional haircut services',
     color: '#2563eb',
   },
@@ -246,15 +305,15 @@ export const SERVICE_CATEGORIES = {
     description: 'Beard trimming and shaving',
     color: '#dc2626',
   },
-  styling: {
-    label: 'Styling Packages',
-    description: 'Complete grooming packages',
-    color: '#059669',
-  },
   kids: {
     label: 'Kids Services',
     description: 'Child-friendly services',
     color: '#7c3aed',
+  },
+  extra: {
+    label: 'Extra Services',
+    description: 'Additional grooming services',
+    color: '#059669',
   },
 } as const;
 

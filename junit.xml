@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="28" failures="13" errors="0" time="3.27">
+  <testsuite name="Performance Hooks" errors="0" failures="5" skipped="0" timestamp="2025-06-14T14:16:04" time="0.645" tests="16">
+    <testcase classname="Performance Hooks usePerformanceMonitor provides performance monitoring functions" name="Performance Hooks usePerformanceMonitor provides performance monitoring functions" time="0.026">
+    </testcase>
+    <testcase classname="Performance Hooks usePerformanceMonitor measures component lifetime on unmount" name="Performance Hooks usePerformanceMonitor measures component lifetime on unmount" time="0.002">
+    </testcase>
+    <testcase classname="Performance Hooks usePerformanceMonitor measures render time between start and end" name="Performance Hooks usePerformanceMonitor measures render time between start and end" time="0.001">
+    </testcase>
+    <testcase classname="Performance Hooks usePerformanceMonitor does not warn for fast renders" name="Performance Hooks usePerformanceMonitor does not warn for fast renders" time="0.002">
+    </testcase>
+    <testcase classname="Performance Hooks usePerformanceMonitor handles endRender without startRender" name="Performance Hooks usePerformanceMonitor handles endRender without startRender" time="0.001">
+    </testcase>
+    <testcase classname="Performance Hooks usePerformanceMonitor memoizes callback functions" name="Performance Hooks usePerformanceMonitor memoizes callback functions" time="0.001">
+    </testcase>
+    <testcase classname="Performance Hooks useAnalytics provides analytics tracking functions" name="Performance Hooks useAnalytics provides analytics tracking functions" time="0.002">
+    </testcase>
+    <testcase classname="Performance Hooks useAnalytics tracks events in development mode" name="Performance Hooks useAnalytics tracks events in development mode" time="0.001">
+    </testcase>
+    <testcase classname="Performance Hooks useAnalytics tracks page views with page name" name="Performance Hooks useAnalytics tracks page views with page name" time="0.002">
+    </testcase>
+    <testcase classname="Performance Hooks useAnalytics memoizes callback functions" name="Performance Hooks useAnalytics memoizes callback functions" time="0.001">
+    </testcase>
+    <testcase classname="Performance Hooks useWebVitals initializes Web Vitals monitoring in browser environment" name="Performance Hooks useWebVitals initializes Web Vitals monitoring in browser environment" time="0">
+    </testcase>
+    <testcase classname="Performance Hooks useWebVitals does not initialize in non-browser environment" name="Performance Hooks useWebVitals does not initialize in non-browser environment" time="0.001">
+      <failure>ReferenceError: window is not defined
+    at getActiveElementDeep (C:\code\mp-barbers\node_modules\react-dom\cjs\react-dom.development.js:8442:13)
+    at getSelectionInformation (C:\code\mp-barbers\node_modules\react-dom\cjs\react-dom.development.js:8476:21)
+    at prepareForCommit (C:\code\mp-barbers\node_modules\react-dom\cjs\react-dom.development.js:10912:26)
+    at commitBeforeMutationEffects (C:\code\mp-barbers\node_modules\react-dom\cjs\react-dom.development.js:22980:27)
+    at commitRootImpl (C:\code\mp-barbers\node_modules\react-dom\cjs\react-dom.development.js:26840:45)
+    at commitRoot (C:\code\mp-barbers\node_modules\react-dom\cjs\react-dom.development.js:26721:5)
+    at performSyncWorkOnRoot (C:\code\mp-barbers\node_modules\react-dom\cjs\react-dom.development.js:26156:3)
+    at flushSyncCallbacks (C:\code\mp-barbers\node_modules\react-dom\cjs\react-dom.development.js:12042:22)
+    at flushSync (C:\code\mp-barbers\node_modules\react-dom\cjs\react-dom.development.js:26240:7)
+    at legacyCreateRootFromDOMContainer (C:\code\mp-barbers\node_modules\react-dom\cjs\react-dom.development.js:29614:5)
+    at legacyRenderSubtreeIntoContainer (C:\code\mp-barbers\node_modules\react-dom\cjs\react-dom.development.js:29640:12)
+    at Object.render (C:\code\mp-barbers\node_modules\react-dom\cjs\react-dom.development.js:29731:10)
+    at C:\code\mp-barbers\node_modules\@testing-library\react-hooks\lib\dom\pure.js:80:18
+    at act (C:\code\mp-barbers\node_modules\react\cjs\react.development.js:2512:16)
+    at actWithWarning (C:\code\mp-barbers\node_modules\react-dom\cjs\react-dom-test-utils.development.js:1740:10)
+    at render (C:\code\mp-barbers\node_modules\@testing-library\react-hooks\lib\dom\pure.js:79:26)
+    at renderHook (C:\code\mp-barbers\node_modules\@testing-library\react-hooks\lib\core\index.js:114:5)
+    at Object.&lt;anonymous&gt; (C:\code\mp-barbers\src\hooks\__tests__\usePerformance.test.ts:261:17)
+    at Promise.then.completed (C:\code\mp-barbers\node_modules\jest-circus\build\utils.js:391:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\code\mp-barbers\node_modules\jest-circus\build\utils.js:316:10)
+    at _callCircusTest (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:218:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:155:3)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:66:9)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:60:9)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:60:9)
+    at run (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:25:3)
+    at runAndTransformResultsToJestFormat (C:\code\mp-barbers\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:170:21)
+    at jestAdapter (C:\code\mp-barbers\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:82:19)
+    at runTestInternal (C:\code\mp-barbers\node_modules\jest-runner\build\runTest.js:389:16)
+    at runTest (C:\code\mp-barbers\node_modules\jest-runner\build\runTest.js:475:34)
+    at Object.worker (C:\code\mp-barbers\node_modules\jest-runner\build\testWorker.js:133:12)</failure>
+    </testcase>
+    <testcase classname="Performance Hooks useMemoryMonitor monitors memory usage periodically in development" name="Performance Hooks useMemoryMonitor monitors memory usage periodically in development" time="0.001">
+      <failure>Error: Should not already be working.
+    at performSyncWorkOnRoot (C:\code\mp-barbers\node_modules\react-dom\cjs\react-dom.development.js:26112:11)
+    at flushSyncCallbacks (C:\code\mp-barbers\node_modules\react-dom\cjs\react-dom.development.js:12042:22)
+    at flushActQueue (C:\code\mp-barbers\node_modules\react\cjs\react.development.js:2667:24)
+    at act (C:\code\mp-barbers\node_modules\react\cjs\react.development.js:2521:11)
+    at actWithWarning (C:\code\mp-barbers\node_modules\react-dom\cjs\react-dom-test-utils.development.js:1740:10)
+    at render (C:\code\mp-barbers\node_modules\@testing-library\react-hooks\lib\dom\pure.js:79:26)
+    at renderHook (C:\code\mp-barbers\node_modules\@testing-library\react-hooks\lib\core\index.js:114:5)
+    at Object.&lt;anonymous&gt; (C:\code\mp-barbers\src\hooks\__tests__\usePerformance.test.ts:285:17)
+    at Promise.then.completed (C:\code\mp-barbers\node_modules\jest-circus\build\utils.js:391:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\code\mp-barbers\node_modules\jest-circus\build\utils.js:316:10)
+    at _callCircusTest (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:218:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:155:3)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:66:9)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:60:9)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:60:9)
+    at run (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:25:3)
+    at runAndTransformResultsToJestFormat (C:\code\mp-barbers\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:170:21)
+    at jestAdapter (C:\code\mp-barbers\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:82:19)
+    at runTestInternal (C:\code\mp-barbers\node_modules\jest-runner\build\runTest.js:389:16)
+    at runTest (C:\code\mp-barbers\node_modules\jest-runner\build\runTest.js:475:34)
+    at Object.worker (C:\code\mp-barbers\node_modules\jest-runner\build\testWorker.js:133:12)</failure>
+    </testcase>
+    <testcase classname="Performance Hooks useMemoryMonitor warns about high memory usage" name="Performance Hooks useMemoryMonitor warns about high memory usage" time="0.001">
+      <failure>Error: Should not already be working.
+    at performSyncWorkOnRoot (C:\code\mp-barbers\node_modules\react-dom\cjs\react-dom.development.js:26112:11)
+    at flushSyncCallbacks (C:\code\mp-barbers\node_modules\react-dom\cjs\react-dom.development.js:12042:22)
+    at flushActQueue (C:\code\mp-barbers\node_modules\react\cjs\react.development.js:2667:24)
+    at act (C:\code\mp-barbers\node_modules\react\cjs\react.development.js:2521:11)
+    at actWithWarning (C:\code\mp-barbers\node_modules\react-dom\cjs\react-dom-test-utils.development.js:1740:10)
+    at render (C:\code\mp-barbers\node_modules\@testing-library\react-hooks\lib\dom\pure.js:79:26)
+    at renderHook (C:\code\mp-barbers\node_modules\@testing-library\react-hooks\lib\core\index.js:114:5)
+    at Object.&lt;anonymous&gt; (C:\code\mp-barbers\src\hooks\__tests__\usePerformance.test.ts:311:17)
+    at Promise.then.completed (C:\code\mp-barbers\node_modules\jest-circus\build\utils.js:391:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\code\mp-barbers\node_modules\jest-circus\build\utils.js:316:10)
+    at _callCircusTest (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:218:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:155:3)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:66:9)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:60:9)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:60:9)
+    at run (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:25:3)
+    at runAndTransformResultsToJestFormat (C:\code\mp-barbers\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:170:21)
+    at jestAdapter (C:\code\mp-barbers\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:82:19)
+    at runTestInternal (C:\code\mp-barbers\node_modules\jest-runner\build\runTest.js:389:16)
+    at runTest (C:\code\mp-barbers\node_modules\jest-runner\build\runTest.js:475:34)
+    at Object.worker (C:\code\mp-barbers\node_modules\jest-runner\build\testWorker.js:133:12)</failure>
+    </testcase>
+    <testcase classname="Performance Hooks useMemoryMonitor handles missing memory API gracefully" name="Performance Hooks useMemoryMonitor handles missing memory API gracefully" time="0">
+      <failure>Error: Should not already be working.
+    at performSyncWorkOnRoot (C:\code\mp-barbers\node_modules\react-dom\cjs\react-dom.development.js:26112:11)
+    at flushSyncCallbacks (C:\code\mp-barbers\node_modules\react-dom\cjs\react-dom.development.js:12042:22)
+    at flushActQueue (C:\code\mp-barbers\node_modules\react\cjs\react.development.js:2667:24)
+    at act (C:\code\mp-barbers\node_modules\react\cjs\react.development.js:2521:11)
+    at actWithWarning (C:\code\mp-barbers\node_modules\react-dom\cjs\react-dom-test-utils.development.js:1740:10)
+    at render (C:\code\mp-barbers\node_modules\@testing-library\react-hooks\lib\dom\pure.js:79:26)
+    at renderHook (C:\code\mp-barbers\node_modules\@testing-library\react-hooks\lib\core\index.js:114:5)
+    at Object.&lt;anonymous&gt; (C:\code\mp-barbers\src\hooks\__tests__\usePerformance.test.ts:329:17)
+    at Promise.then.completed (C:\code\mp-barbers\node_modules\jest-circus\build\utils.js:391:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\code\mp-barbers\node_modules\jest-circus\build\utils.js:316:10)
+    at _callCircusTest (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:218:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:155:3)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:66:9)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:60:9)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:60:9)
+    at run (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:25:3)
+    at runAndTransformResultsToJestFormat (C:\code\mp-barbers\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:170:21)
+    at jestAdapter (C:\code\mp-barbers\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:82:19)
+    at runTestInternal (C:\code\mp-barbers\node_modules\jest-runner\build\runTest.js:389:16)
+    at runTest (C:\code\mp-barbers\node_modules\jest-runner\build\runTest.js:475:34)
+    at Object.worker (C:\code\mp-barbers\node_modules\jest-runner\build\testWorker.js:133:12)</failure>
+    </testcase>
+    <testcase classname="Performance Hooks useMemoryMonitor cleans up interval on unmount" name="Performance Hooks useMemoryMonitor cleans up interval on unmount" time="0">
+      <failure>Error: Should not already be working.
+    at performSyncWorkOnRoot (C:\code\mp-barbers\node_modules\react-dom\cjs\react-dom.development.js:26112:11)
+    at flushSyncCallbacks (C:\code\mp-barbers\node_modules\react-dom\cjs\react-dom.development.js:12042:22)
+    at flushActQueue (C:\code\mp-barbers\node_modules\react\cjs\react.development.js:2667:24)
+    at act (C:\code\mp-barbers\node_modules\react\cjs\react.development.js:2521:11)
+    at actWithWarning (C:\code\mp-barbers\node_modules\react-dom\cjs\react-dom-test-utils.development.js:1740:10)
+    at render (C:\code\mp-barbers\node_modules\@testing-library\react-hooks\lib\dom\pure.js:79:26)
+    at renderHook (C:\code\mp-barbers\node_modules\@testing-library\react-hooks\lib\core\index.js:114:5)
+    at Object.&lt;anonymous&gt; (C:\code\mp-barbers\src\hooks\__tests__\usePerformance.test.ts:341:37)
+    at Promise.then.completed (C:\code\mp-barbers\node_modules\jest-circus\build\utils.js:391:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\code\mp-barbers\node_modules\jest-circus\build\utils.js:316:10)
+    at _callCircusTest (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:218:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:155:3)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:66:9)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:60:9)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:60:9)
+    at run (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:25:3)
+    at runAndTransformResultsToJestFormat (C:\code\mp-barbers\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:170:21)
+    at jestAdapter (C:\code\mp-barbers\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:82:19)
+    at runTestInternal (C:\code\mp-barbers\node_modules\jest-runner\build\runTest.js:389:16)
+    at runTest (C:\code\mp-barbers\node_modules\jest-runner\build\runTest.js:475:34)
+    at Object.worker (C:\code\mp-barbers\node_modules\jest-runner\build\testWorker.js:133:12)</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="SEO Hooks" errors="0" failures="8" skipped="0" timestamp="2025-06-14T14:16:04" time="0.694" tests="12">
+    <testcase classname="SEO Hooks useSEO sets document title correctly" name="SEO Hooks useSEO sets document title correctly" time="0.045">
+      <failure>Error: expect(received).toBe(expected) // Object.is equality
+
+Expected: &quot;Test Page Title | MP Barbers&quot;
+Received: &quot;&quot;
+    at Object.&lt;anonymous&gt; (C:\code\mp-barbers\src\hooks\__tests__\useSEO.test.ts:62:34)
+    at Promise.then.completed (C:\code\mp-barbers\node_modules\jest-circus\build\utils.js:391:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\code\mp-barbers\node_modules\jest-circus\build\utils.js:316:10)
+    at _callCircusTest (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:218:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:155:3)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:66:9)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:60:9)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:60:9)
+    at run (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:25:3)
+    at runAndTransformResultsToJestFormat (C:\code\mp-barbers\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:170:21)
+    at jestAdapter (C:\code\mp-barbers\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:82:19)
+    at runTestInternal (C:\code\mp-barbers\node_modules\jest-runner\build\runTest.js:389:16)
+    at runTest (C:\code\mp-barbers\node_modules\jest-runner\build\runTest.js:475:34)
+    at Object.worker (C:\code\mp-barbers\node_modules\jest-runner\build\testWorker.js:133:12)</failure>
+    </testcase>
+    <testcase classname="SEO Hooks useSEO creates meta description tag" name="SEO Hooks useSEO creates meta description tag" time="0.005">
+      <failure>Error: expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+Expected: &quot;meta&quot;
+
+Number of calls: 0
+    at Object.&lt;anonymous&gt; (C:\code\mp-barbers\src\hooks\__tests__\useSEO.test.ts:75:42)
+    at Promise.then.completed (C:\code\mp-barbers\node_modules\jest-circus\build\utils.js:391:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\code\mp-barbers\node_modules\jest-circus\build\utils.js:316:10)
+    at _callCircusTest (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:218:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:155:3)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:66:9)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:60:9)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:60:9)
+    at run (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:25:3)
+    at runAndTransformResultsToJestFormat (C:\code\mp-barbers\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:170:21)
+    at jestAdapter (C:\code\mp-barbers\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:82:19)
+    at runTestInternal (C:\code\mp-barbers\node_modules\jest-runner\build\runTest.js:389:16)
+    at runTest (C:\code\mp-barbers\node_modules\jest-runner\build\runTest.js:475:34)
+    at Object.worker (C:\code\mp-barbers\node_modules\jest-runner\build\testWorker.js:133:12)</failure>
+    </testcase>
+    <testcase classname="SEO Hooks useSEO creates keyword meta tags" name="SEO Hooks useSEO creates keyword meta tags" time="0.003">
+      <failure>Error: expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+Expected: &quot;name&quot;, &quot;keywords&quot;
+
+Number of calls: 0
+    at Object.&lt;anonymous&gt; (C:\code\mp-barbers\src\hooks\__tests__\useSEO.test.ts:91:44)
+    at Promise.then.completed (C:\code\mp-barbers\node_modules\jest-circus\build\utils.js:391:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\code\mp-barbers\node_modules\jest-circus\build\utils.js:316:10)
+    at _callCircusTest (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:218:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:155:3)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:66:9)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:60:9)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:60:9)
+    at run (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:25:3)
+    at runAndTransformResultsToJestFormat (C:\code\mp-barbers\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:170:21)
+    at jestAdapter (C:\code\mp-barbers\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:82:19)
+    at runTestInternal (C:\code\mp-barbers\node_modules\jest-runner\build\runTest.js:389:16)
+    at runTest (C:\code\mp-barbers\node_modules\jest-runner\build\runTest.js:475:34)
+    at Object.worker (C:\code\mp-barbers\node_modules\jest-runner\build\testWorker.js:133:12)</failure>
+    </testcase>
+    <testcase classname="SEO Hooks useSEO creates Open Graph meta tags" name="SEO Hooks useSEO creates Open Graph meta tags" time="0.004">
+      <failure>Error: expect(jest.fn()).toHaveBeenCalledTimes(expected)
+
+Expected number of calls: 8
+Received number of calls: 0
+    at Object.&lt;anonymous&gt; (C:\code\mp-barbers\src\hooks\__tests__\useSEO.test.ts:109:42)
+    at Promise.then.completed (C:\code\mp-barbers\node_modules\jest-circus\build\utils.js:391:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\code\mp-barbers\node_modules\jest-circus\build\utils.js:316:10)
+    at _callCircusTest (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:218:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:155:3)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:66:9)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:60:9)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:60:9)
+    at run (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:25:3)
+    at runAndTransformResultsToJestFormat (C:\code\mp-barbers\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:170:21)
+    at jestAdapter (C:\code\mp-barbers\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:82:19)
+    at runTestInternal (C:\code\mp-barbers\node_modules\jest-runner\build\runTest.js:389:16)
+    at runTest (C:\code\mp-barbers\node_modules\jest-runner\build\runTest.js:475:34)
+    at Object.worker (C:\code\mp-barbers\node_modules\jest-runner\build\testWorker.js:133:12)</failure>
+    </testcase>
+    <testcase classname="SEO Hooks useSEO uses default values when props not provided" name="SEO Hooks useSEO uses default values when props not provided" time="0.003">
+      <failure>Error: expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+Expected: &quot;property&quot;, &quot;og:type&quot;
+
+Number of calls: 0
+    at Object.&lt;anonymous&gt; (C:\code\mp-barbers\src\hooks\__tests__\useSEO.test.ts:127:44)
+    at Promise.then.completed (C:\code\mp-barbers\node_modules\jest-circus\build\utils.js:391:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\code\mp-barbers\node_modules\jest-circus\build\utils.js:316:10)
+    at _callCircusTest (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:218:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:155:3)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:66:9)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:60:9)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:60:9)
+    at run (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:25:3)
+    at runAndTransformResultsToJestFormat (C:\code\mp-barbers\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:170:21)
+    at jestAdapter (C:\code\mp-barbers\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:82:19)
+    at runTestInternal (C:\code\mp-barbers\node_modules\jest-runner\build\runTest.js:389:16)
+    at runTest (C:\code\mp-barbers\node_modules\jest-runner\build\runTest.js:475:34)
+    at Object.worker (C:\code\mp-barbers\node_modules\jest-runner\build\testWorker.js:133:12)</failure>
+    </testcase>
+    <testcase classname="SEO Hooks useStructuredData creates script tag with structured data" name="SEO Hooks useStructuredData creates script tag with structured data" time="0.004">
+      <failure>Error: expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+Expected: &quot;script&quot;
+
+Number of calls: 0
+    at Object.&lt;anonymous&gt; (C:\code\mp-barbers\src\hooks\__tests__\useSEO.test.ts:154:42)
+    at Promise.then.completed (C:\code\mp-barbers\node_modules\jest-circus\build\utils.js:391:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\code\mp-barbers\node_modules\jest-circus\build\utils.js:316:10)
+    at _callCircusTest (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:218:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:155:3)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:66:9)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:60:9)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:60:9)
+    at run (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:25:3)
+    at runAndTransformResultsToJestFormat (C:\code\mp-barbers\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:170:21)
+    at jestAdapter (C:\code\mp-barbers\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:82:19)
+    at runTestInternal (C:\code\mp-barbers\node_modules\jest-runner\build\runTest.js:389:16)
+    at runTest (C:\code\mp-barbers\node_modules\jest-runner\build\runTest.js:475:34)
+    at Object.worker (C:\code\mp-barbers\node_modules\jest-runner\build\testWorker.js:133:12)</failure>
+    </testcase>
+    <testcase classname="SEO Hooks useStructuredData removes script tag on unmount" name="SEO Hooks useStructuredData removes script tag on unmount" time="0.002">
+      <failure>Error: expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+Expected: {&quot;textContent&quot;: &quot;&quot;, &quot;type&quot;: &quot;&quot;}
+
+Number of calls: 0
+    at Object.&lt;anonymous&gt; (C:\code\mp-barbers\src\hooks\__tests__\useSEO.test.ts:174:45)
+    at Promise.then.completed (C:\code\mp-barbers\node_modules\jest-circus\build\utils.js:391:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\code\mp-barbers\node_modules\jest-circus\build\utils.js:316:10)
+    at _callCircusTest (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:218:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:155:3)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:66:9)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:60:9)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:60:9)
+    at run (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:25:3)
+    at runAndTransformResultsToJestFormat (C:\code\mp-barbers\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:170:21)
+    at jestAdapter (C:\code\mp-barbers\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:82:19)
+    at runTestInternal (C:\code\mp-barbers\node_modules\jest-runner\build\runTest.js:389:16)
+    at runTest (C:\code\mp-barbers\node_modules\jest-runner\build\runTest.js:475:34)
+    at Object.worker (C:\code\mp-barbers\node_modules\jest-runner\build\testWorker.js:133:12)</failure>
+    </testcase>
+    <testcase classname="SEO Hooks useStructuredData handles complex structured data objects" name="SEO Hooks useStructuredData handles complex structured data objects" time="0.002">
+      <failure>Error: expect(received).toBe(expected) // Object.is equality
+
+Expected: &quot;{\&quot;@context\&quot;:\&quot;https://schema.org\&quot;,\&quot;@type\&quot;:\&quot;HairSalon\&quot;,\&quot;name\&quot;:\&quot;MP Barbers\&quot;,\&quot;description\&quot;:\&quot;Modern barbershop offering professional haircuts, beard trims, and grooming services\&quot;,\&quot;url\&quot;:\&quot;https://mpbarbers.com\&quot;,\&quot;telephone\&quot;:\&quot;(555) 123-4567\&quot;,\&quot;email\&quot;:\&quot;hello@mpbarbers.com\&quot;,\&quot;address\&quot;:{\&quot;@type\&quot;:\&quot;PostalAddress\&quot;,\&quot;streetAddress\&quot;:\&quot;123 Main Street\&quot;,\&quot;addressLocality\&quot;:\&quot;Downtown District\&quot;,\&quot;addressRegion\&quot;:\&quot;New York\&quot;,\&quot;postalCode\&quot;:\&quot;10001\&quot;,\&quot;addressCountry\&quot;:\&quot;US\&quot;},\&quot;geo\&quot;:{\&quot;@type\&quot;:\&quot;GeoCoordinates\&quot;,\&quot;latitude\&quot;:\&quot;40.7589\&quot;,\&quot;longitude\&quot;:\&quot;-73.9851\&quot;},\&quot;openingHours\&quot;:[\&quot;Mo-Fr 09:00-18:00\&quot;,\&quot;Sa 09:00-17:00\&quot;],\&quot;priceRange\&quot;:\&quot;€€\&quot;,\&quot;aggregateRating\&quot;:{\&quot;@type\&quot;:\&quot;AggregateRating\&quot;,\&quot;ratingValue\&quot;:\&quot;5.0\&quot;,\&quot;reviewCount\&quot;:\&quot;127\&quot;},\&quot;hasOfferCatalog\&quot;:{\&quot;@type\&quot;:\&quot;OfferCatalog\&quot;,\&quot;name\&quot;:\&quot;Barbershop Services\&quot;,\&quot;itemListElement\&quot;:[{\&quot;@type\&quot;:\&quot;Offer\&quot;,\&quot;itemOffered\&quot;:{\&quot;@type\&quot;:\&quot;Service\&quot;,\&quot;name\&quot;:\&quot;Classic Cut\&quot;,\&quot;description\&quot;:\&quot;Traditional haircut with modern precision\&quot;},\&quot;price\&quot;:\&quot;35\&quot;,\&quot;priceCurrency\&quot;:\&quot;EUR\&quot;},{\&quot;@type\&quot;:\&quot;Offer\&quot;,\&quot;itemOffered\&quot;:{\&quot;@type\&quot;:\&quot;Service\&quot;,\&quot;name\&quot;:\&quot;Beard Trim\&quot;,\&quot;description\&quot;:\&quot;Professional beard shaping and trimming\&quot;},\&quot;price\&quot;:\&quot;25\&quot;,\&quot;priceCurrency\&quot;:\&quot;EUR\&quot;}]}}&quot;
+Received: &quot;&quot;
+    at Object.&lt;anonymous&gt; (C:\code\mp-barbers\src\hooks\__tests__\useSEO.test.ts:186:45)
+    at Promise.then.completed (C:\code\mp-barbers\node_modules\jest-circus\build\utils.js:391:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\code\mp-barbers\node_modules\jest-circus\build\utils.js:316:10)
+    at _callCircusTest (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:218:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:155:3)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:66:9)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:60:9)
+    at _runTestsForDescribeBlock (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:60:9)
+    at run (C:\code\mp-barbers\node_modules\jest-circus\build\run.js:25:3)
+    at runAndTransformResultsToJestFormat (C:\code\mp-barbers\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:170:21)
+    at jestAdapter (C:\code\mp-barbers\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:82:19)
+    at runTestInternal (C:\code\mp-barbers\node_modules\jest-runner\build\runTest.js:389:16)
+    at runTest (C:\code\mp-barbers\node_modules\jest-runner\build\runTest.js:475:34)
+    at Object.worker (C:\code\mp-barbers\node_modules\jest-runner\build\testWorker.js:133:12)</failure>
+    </testcase>
+    <testcase classname="SEO Hooks SEO Configuration SEO_CONFIGS contains all required page configurations" name="SEO Hooks SEO Configuration SEO_CONFIGS contains all required page configurations" time="0">
+    </testcase>
+    <testcase classname="SEO Hooks SEO Configuration each SEO config has required properties" name="SEO Hooks SEO Configuration each SEO config has required properties" time="0.003">
+    </testcase>
+    <testcase classname="SEO Hooks Business Structured Data BUSINESS_STRUCTURED_DATA has required Schema.org properties" name="SEO Hooks Business Structured Data BUSINESS_STRUCTURED_DATA has required Schema.org properties" time="0">
+    </testcase>
+    <testcase classname="SEO Hooks Business Structured Data address has proper postal address structure" name="SEO Hooks Business Structured Data address has proper postal address structure" time="0">
+    </testcase>
+  </testsuite>
+</testsuites>

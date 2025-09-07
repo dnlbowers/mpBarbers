@@ -24,6 +24,24 @@ const Navigation: React.FC = () => {
     }
   };
 
+  const handleImageError = (event: React.SyntheticEvent<HTMLImageElement>) => {
+    // Fallback to text if image fails to load
+    const target = event.target as HTMLImageElement;
+    target.style.display = 'none';
+    
+    // Create fallback text element
+    const fallback = document.createElement('h1');
+    fallback.textContent = 'MP BARBERS';
+    fallback.className = 'text-2xl font-bold text-gray-900 cursor-pointer';
+    fallback.onclick = () => handleNavigation('home');
+    fallback.onkeydown = (e) => handleKeyDown(e as any, 'home');
+    fallback.tabIndex = 0;
+    fallback.setAttribute('role', 'button');
+    fallback.setAttribute('aria-label', 'MP Barbers - Go to home page');
+    
+    target.parentElement?.appendChild(fallback);
+  };
+
   return (
     <nav 
       className="fixed top-0 w-full bg-white shadow-sm z-50"
@@ -31,19 +49,21 @@ const Navigation: React.FC = () => {
       aria-label="Main navigation"
     >
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
           <div className="flex items-center">
-            <h1 
-              className="text-2xl font-bold text-gray-900"
+            <img 
+              src="/images/nav/logo-fullsize.webp"
+              alt="MP Barbershop - Sharp Looks, Clean Cuts"
+              className="h-12 w-auto max-w-[180px] cursor-pointer transition-opacity duration-200 hover:opacity-90 md:h-16 md:max-w-[280px]"
               onClick={() => handleNavigation('home')}
               onKeyDown={(e) => handleKeyDown(e, 'home')}
+              onError={handleImageError}
               tabIndex={0}
               role="button"
               aria-label="MP Barbers - Go to home page"
-            >
-              MP BARBERS
-            </h1>
+              loading="eager"
+            />
           </div>
           
           {/* Desktop Navigation */}

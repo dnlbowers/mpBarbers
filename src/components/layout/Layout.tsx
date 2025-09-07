@@ -50,7 +50,7 @@ const Layout: React.FC<LayoutProps> = ({
         id="main-content"
         role="main"
         tabIndex={-1}
-        className="focus:outline-none"
+        className="focus:outline-none pt-16 md:pt-20"
       >
         {children}
       </main>

@@ -37,7 +37,7 @@ const HomePage: React.FC = () => {
   };
 
   return (
-    <div className="pt-16">
+    <div>
       {/* Hero Section */}
       <section 
         className={`relative h-screen flex items-center justify-center ${styles.heroSection}`}

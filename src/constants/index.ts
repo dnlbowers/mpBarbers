@@ -121,9 +121,9 @@ export const SERVICES: readonly Service[] = [
  * @business_rule 30-minute intervals with lunch break from 12:30-14:00
  */
 export const TIME_SLOTS: readonly string[] = [
-  '9:00', '9:30', '10:00', '10:30', '11:00', '11:30',
+  '8:30', '9:00', '9:30', '10:00', '10:30', '11:00', '11:30',
   '12:00', '12:30', '14:00', '14:30', '15:00', '15:30',
-  '16:00', '16:30', '17:00', '17:30'
+  '16:00', '16:30', '17:00', '17:30', '18:00', '18:30'
 ] as const;
 
 /**
@@ -136,12 +136,12 @@ export const TIME_SLOTS: readonly string[] = [
  * @business_rule Sunday closed, Saturday shorter hours, standard weekday schedule
  */
 export const BUSINESS_HOURS: BusinessHours = {
-  monday: { open: '09:00', close: '18:00', closed: false },
-  tuesday: { open: '09:00', close: '18:00', closed: false },
-  wednesday: { open: '09:00', close: '18:00', closed: false },
-  thursday: { open: '09:00', close: '18:00', closed: false },
-  friday: { open: '09:00', close: '18:00', closed: false },
-  saturday: { open: '09:00', close: '17:00', closed: false },
+  monday: { open: '00:00', close: '00:00', closed: true },
+  tuesday: { open: '08:30', close: '19:00', closed: false },
+  wednesday: { open: '08:30', close: '19:00', closed: false },
+  thursday: { open: '08:30', close: '19:00', closed: false },
+  friday: { open: '08:30', close: '19:00', closed: false },
+  saturday: { open: '08:30', close: '19:00', closed: false },
   sunday: { open: '00:00', close: '00:00', closed: true },
 } as const;
 
@@ -156,16 +156,15 @@ export const BUSINESS_HOURS: BusinessHours = {
  */
 export const CONTACT_INFO: ContactInfo = {
   address: {
-    street: '123 Main Street',
-    city: 'Downtown District',
-    state: 'New York',
-    zipCode: '10001',
+    street: 'Triq il-karmnu 59',
+    city: 'Birkirkara',
+    state: 'Malta',
+    zipCode: '',
   },
-  phone: '(555) 123-4567',
-  email: 'hello@mpbarbers.com',
+  phone: '7723 5750',
+  email: 'Infompbarbershop@gmail.com',
   socialMedia: {
-    instagram: '@mpbarbers',
-    facebook: 'MPBarbers',
+    facebook: 'https://www.facebook.com/profile.php?id=61577771502632',
   },
 } as const;
 
@@ -260,7 +259,7 @@ export const TESTIMONIALS: readonly Testimonial[] = [
  */
 export const APP_CONFIG = {
   name: 'MP BARBERS',
-  tagline: 'Classic Service. Contemporary Style.',
+  tagline: 'Sharp looks. Clean cuts.',
   maxBookingDaysAhead: 30,
   minBookingHoursAhead: 2,
   defaultCurrency: 'EUR',

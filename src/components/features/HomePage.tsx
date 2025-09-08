@@ -39,7 +39,7 @@ const HomePage: React.FC = () => {
       >
         <div className={`text-center z-10 max-w-4xl mx-auto px-4 ${styles.heroContent}`}>
           <h1 className="text-6xl md:text-8xl font-bold text-gray-900 mb-4">
-            MODERN CUTS
+            MP BARBERSHOP
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 mb-8">
             {APP_CONFIG.tagline}

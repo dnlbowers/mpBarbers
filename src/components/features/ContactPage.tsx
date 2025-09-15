@@ -1,8 +1,25 @@
 /**
- * Contact Page Component - Contact information and form
+ * Contact Page Component
+ *
+ * Displays barbershop contact information and provides a contact form
+ * that sends emails via EmailJS service.
+ *
+ * Features:
+ * - Shop location, hours, phone, and email display
+ * - Contact form with validation
+ * - Dual email system: notification to owner and auto-reply to user
+ * - Real-time form validation with error display
+ * - Accessible form inputs with ARIA labels
+ *
+ * EmailJS Configuration:
+ * - Service ID: service_5iviq2n
+ * - Owner notification template: template_d1doroc
+ * - User auto-reply template: template_17on3fq
+ * - Public key: Zxi00MmA3WSCOlzwK
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import emailjs from '@emailjs/browser';
 import { CONTACT_INFO } from '../../constants';
 import { useFormValidation } from '../../hooks';
 import { validateContactForm } from '../../utils';
@@ -28,21 +45,68 @@ const ContactPage: React.FC = () => {
     reset,
   } = useFormValidation(initialContactData, validateContactForm);
 
+  useEffect(() => {
+    emailjs.init({
+      publicKey: 'Zxi00MmA3WSCOlzwK',
+    });
+  }, []);
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    
+
     if (!validate()) {
       return;
     }
 
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    alert('Message sent successfully! We\'ll get back to you soon.');
-    reset();
-    setIsSubmitting(false);
+
+    try {
+      const templateParams = {
+        name: formData.name,
+        email: formData.email,
+        title: formData.message,
+        message: formData.message,
+      };
+
+      if (!templateParams.name || !templateParams.email || !templateParams.title) {
+        throw new Error('Missing required fields: name, email, or message');
+      }
+
+      const ownerResponse = await emailjs.send(
+        'service_5iviq2n',
+        'template_d1doroc',
+        templateParams
+      );
+
+      const userResponse = await emailjs.send(
+        'service_5iviq2n',
+        'template_17on3fq',
+        templateParams
+      );
+
+      if (ownerResponse.status === 200 && userResponse.status === 200) {
+        alert('Message sent successfully! We\'ll get back to you soon.');
+        reset();
+      } else {
+        throw new Error(`EmailJS returned status: Owner=${ownerResponse.status}, User=${userResponse.status}`);
+      }
+    } catch (error) {
+      console.error('Failed to send email:', error);
+
+      const userMessage = `We're sorry, but we couldn't send your message at this time. Please try again or give us a call at ${CONTACT_INFO.phone}. We're happy to help!`;
+
+      if (error && typeof error === 'object') {
+        const emailError = error as any;
+        console.error('EmailJS error details:', {
+          status: emailError.status,
+          text: emailError.text
+        });
+      }
+
+      alert(userMessage);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -54,7 +118,6 @@ const ContactPage: React.FC = () => {
           </h1>
           
           <div className="grid md:grid-cols-2 gap-12">
-            {/* Contact Information */}
             <div>
               <h2 className="text-3xl font-semibold mb-8">Visit Us</h2>
               
@@ -115,7 +178,6 @@ const ContactPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Contact Form */}
             <Card padding="lg">
               <h2 className="text-3xl font-semibold mb-8">Send a Message</h2>
               

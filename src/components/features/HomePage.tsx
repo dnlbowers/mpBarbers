@@ -68,21 +68,11 @@ const HomePage: React.FC = () => {
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             {SERVICES.slice(0, 3).map((service) => (
-              <Card
+              <button
                 key={service.id}
-                variant="outlined"
-                hover
-                className={`text-center cursor-pointer ${styles.serviceCard}`}
+                className={`bg-white border border-gray-200 rounded-lg p-6 text-center transition-all duration-200 hover:border-gray-400 cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-500 ${styles.serviceCard}`}
                 onClick={handleViewServicesClick}
-                role="button"
-                tabIndex={0}
                 aria-label={`View ${service.name} details and pricing`}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    handleViewServicesClick();
-                  }
-                }}
               >
                 <h3 className="text-2xl font-semibold mb-2">
                   {service.name}
@@ -98,7 +88,7 @@ const HomePage: React.FC = () => {
                     {service.description}
                   </p>
                 )}
-              </Card>
+              </button>
             ))}
           </div>
           <div className="text-center mt-8">

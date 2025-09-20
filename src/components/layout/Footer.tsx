@@ -10,9 +10,8 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer 
+    <footer
       className="bg-gray-900 text-white py-8"
-      role="contentinfo"
       aria-label="Site footer"
     >
       <div className="max-w-6xl mx-auto px-4">

@@ -46,9 +46,8 @@ const Layout: React.FC<LayoutProps> = ({
       
       <Navigation />
       
-      <main 
+      <main
         id="main-content"
-        role="main"
         tabIndex={-1}
         className="focus:outline-none pt-16 md:pt-20"
       >

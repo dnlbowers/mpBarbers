@@ -17,7 +17,6 @@
  * - User auto-reply template: template_17on3fq
  * - Public key: Zxi00MmA3WSCOlzwK
  */
-
 import React, { useState, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 import { CONTACT_INFO } from '../../constants';
@@ -26,6 +25,7 @@ import { validateContactForm } from '../../utils';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
 import Card from '../ui/Card';
+import Modal from '../ui/Modal';
 import type { ContactFormData } from '../../types';
 
 const initialContactData: ContactFormData = {
@@ -37,6 +37,17 @@ const initialContactData: ContactFormData = {
 
 const ContactPage: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [modalState, setModalState] = useState<{
+    isOpen: boolean;
+    variant: 'success' | 'error' | 'info';
+    title: string;
+    message: string;
+  }>({
+    isOpen: false,
+    variant: 'info',
+    title: '',
+    message: ''
+  });
   const {
     data: formData,
     errors,
@@ -85,7 +96,12 @@ const ContactPage: React.FC = () => {
       );
 
       if (ownerResponse.status === 200 && userResponse.status === 200) {
-        alert('Message sent successfully! We\'ll get back to you soon.');
+        setModalState({
+          isOpen: true,
+          variant: 'success',
+          title: 'Message Sent!',
+          message: 'Your message has been sent successfully! We\'ll get back to you soon.'
+        });
         reset();
       } else {
         throw new Error(`EmailJS returned status: Owner=${ownerResponse.status}, User=${userResponse.status}`);
@@ -103,7 +119,12 @@ const ContactPage: React.FC = () => {
         });
       }
 
-      alert(userMessage);
+      setModalState({
+        isOpen: true,
+        variant: 'error',
+        title: 'Unable to Send Message',
+        message: userMessage
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -226,8 +247,8 @@ const ContactPage: React.FC = () => {
                   {errors.length > 0 && (
                     <div className="bg-red-50 border border-red-200 rounded-md p-4" role="alert">
                       <ul className="text-red-700 text-sm space-y-1">
-                        {errors.map((error, index) => (
-                          <li key={index}>• {error}</li>
+                        {errors.map((error) => (
+                          <li key={error}>• {error}</li>
                         ))}
                       </ul>
                     </div>
@@ -248,6 +269,14 @@ const ContactPage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      <Modal
+        isOpen={modalState.isOpen}
+        onClose={() => setModalState({ ...modalState, isOpen: false })}
+        title={modalState.title}
+        message={modalState.message}
+        variant={modalState.variant}
+      />
     </div>
   );
 };

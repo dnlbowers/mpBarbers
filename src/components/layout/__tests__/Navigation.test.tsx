@@ -145,14 +145,14 @@ describe('Navigation Component', () => {
       setActiveTab: mockSetActiveTab,
       toggleMobileMenu: mockToggleMobileMenu
     });
-    
+
     render(
       <TestWrapper>
         <Navigation />
       </TestWrapper>
     );
-    
-    const mobileMenu = screen.getByRole('button', { name: /close menu/i }).closest('nav')?.querySelector('#mobile-menu');
+
+    const mobileMenu = screen.getByTestId('mobile-menu');
     expect(mobileMenu).toBeInTheDocument();
     expect(mobileMenu).not.toHaveAttribute('aria-hidden', 'true');
   });
@@ -163,14 +163,14 @@ describe('Navigation Component', () => {
       setActiveTab: mockSetActiveTab,
       toggleMobileMenu: mockToggleMobileMenu
     });
-    
+
     render(
       <TestWrapper>
         <Navigation />
       </TestWrapper>
     );
-    
-    const mobileMenu = screen.getByRole('button', { name: /open menu/i }).closest('nav')?.querySelector('#mobile-menu');
+
+    const mobileMenu = screen.getByTestId('mobile-menu');
     expect(mobileMenu).toBeInTheDocument();
     expect(mobileMenu).toHaveAttribute('aria-hidden', 'true');
   });
@@ -198,24 +198,23 @@ describe('Navigation Component', () => {
 
   test('handles navigation item clicks', async () => {
     const user = userEvent.setup();
-    
+
     render(
       <TestWrapper>
         <Navigation />
       </TestWrapper>
     );
-    
+
     // Find navigation buttons (excluding logo and mobile menu button)
     const navButtons = screen.getAllByRole('button').filter(button =>
       !button.getAttribute('aria-label')?.includes('MP Barbers') &&
       !button.textContent?.includes('☰') &&
       !button.textContent?.includes('✕')
     );
-    
-    if (navButtons.length > 0) {
-      await user.click(navButtons[0]);
-      expect(mockSetActiveTab).toHaveBeenCalled();
-    }
+
+    expect(navButtons.length).toBeGreaterThan(0);
+    await user.click(navButtons[0]);
+    expect(mockSetActiveTab).toHaveBeenCalled();
   });
 
   test('handles mobile navigation item clicks', async () => {
@@ -224,24 +223,23 @@ describe('Navigation Component', () => {
       setActiveTab: mockSetActiveTab,
       toggleMobileMenu: mockToggleMobileMenu
     });
-    
+
     const user = userEvent.setup();
-    
+
     render(
       <TestWrapper>
         <Navigation />
       </TestWrapper>
     );
-    
+
     // Mobile menu should be visible and have navigation items
     const mobileNavButtons = screen.getAllByRole('button').filter(button =>
       !button.getAttribute('aria-label')?.includes('MP Barbers') &&
       !button.textContent?.includes('✕')
     );
-    
-    if (mobileNavButtons.length > 0) {
-      await user.click(mobileNavButtons[0]);
-      expect(mockSetActiveTab).toHaveBeenCalled();
-    }
+
+    expect(mobileNavButtons.length).toBeGreaterThan(0);
+    await user.click(mobileNavButtons[0]);
+    expect(mockSetActiveTab).toHaveBeenCalled();
   });
 });

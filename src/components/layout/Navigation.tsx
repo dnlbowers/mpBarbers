@@ -95,10 +95,11 @@ const Navigation: React.FC = () => {
       {/* Mobile Menu */}
       <div
         id="mobile-menu"
+        data-testid="mobile-menu"
         className={cn(
           'md:hidden bg-white border-t transition-all duration-200 ease-in-out',
-          mobileMenuOpen 
-            ? 'max-h-64 opacity-100' 
+          mobileMenuOpen
+            ? 'max-h-64 opacity-100'
             : 'max-h-0 opacity-0 overflow-hidden'
         )}
         aria-hidden={!mobileMenuOpen}

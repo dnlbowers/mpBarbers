@@ -119,10 +119,10 @@ describe('HomePage Component', () => {
     
     // Find the first service card and click it
     const serviceCards = screen.getAllByRole('button');
-    const firstServiceCard = serviceCards.find(card => 
+    const firstServiceCard = serviceCards.find(card =>
       card.getAttribute('aria-label')?.includes('Book')
-    );
-    
+    ) as HTMLElement;
+
     expect(firstServiceCard).toBeInTheDocument();
     await user.click(firstServiceCard);
   });
@@ -135,15 +135,13 @@ describe('HomePage Component', () => {
     );
     
     const serviceCards = screen.getAllByRole('button');
-    const firstServiceCard = serviceCards.find(card => 
+    const firstServiceCard = serviceCards.find(card =>
       card.getAttribute('aria-label')?.includes('Book')
-    );
-    
+    ) as HTMLElement;
+
     expect(firstServiceCard).toBeInTheDocument();
     fireEvent.keyDown(firstServiceCard, { key: 'Enter' });
-
     fireEvent.keyDown(firstServiceCard, { key: ' ' });
-    expect(firstServiceCard).toBeInTheDocument();
   });
 
   test('handles View All Services button click', async () => {

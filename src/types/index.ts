@@ -130,6 +130,7 @@ export interface ButtonProps extends BaseComponentProps {
   readonly onMouseEnter?: () => void;
   readonly onMouseLeave?: () => void;
   readonly onFocus?: () => void;
+  readonly onBlur?: () => void;
   readonly title?: string;
   readonly 'data-testid'?: string;
 }

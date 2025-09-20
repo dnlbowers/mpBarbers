@@ -118,13 +118,13 @@ describe('Button Component', () => {
 
     test('renders loading state', () => {
       render(<Button loading>Loading Button</Button>);
-      
+
       const button = screen.getByRole('button');
       expect(button).toBeDisabled();
       expect(button).toHaveAttribute('aria-busy', 'true');
-      
+
       // Should display loading spinner
-      const spinner = screen.getByRole('img', { hidden: true });
+      const spinner = button.querySelector('svg');
       expect(spinner).toBeInTheDocument();
       expect(spinner).toHaveClass('animate-spin');
     });
@@ -254,8 +254,9 @@ describe('Button Component', () => {
 
     test('loading spinner is hidden from screen readers', () => {
       render(<Button loading>Loading Button</Button>);
-      
-      const spinner = screen.getByRole('img', { hidden: true });
+
+      const button = screen.getByRole('button');
+      const spinner = button.querySelector('svg');
       expect(spinner).toHaveAttribute('aria-hidden', 'true');
     });
 
@@ -364,13 +365,13 @@ describe('Button Component', () => {
 
     test('handles both disabled and loading states', () => {
       render(<Button disabled loading>Disabled and Loading</Button>);
-      
+
       const button = screen.getByRole('button');
       expect(button).toBeDisabled();
       expect(button).toHaveAttribute('aria-busy', 'true');
-      
+
       // Should show loading spinner
-      const spinner = screen.getByRole('img', { hidden: true });
+      const spinner = button.querySelector('svg');
       expect(spinner).toBeInTheDocument();
     });
 
@@ -472,8 +473,9 @@ describe('Button Component', () => {
      */
     test('loading spinner has correct animation classes', () => {
       render(<Button loading>Loading</Button>);
-      
-      const spinner = screen.getByRole('img', { hidden: true });
+
+      const button = screen.getByRole('button');
+      const spinner = button.querySelector('svg');
       expect(spinner).toHaveClass('animate-spin');
     });
 
@@ -501,7 +503,7 @@ describe('Button Component', () => {
      */
     test('supports CSS custom properties', () => {
       render(
-        <div style={{ '--button-bg': 'red' }}>
+        <div style={{ '--button-bg': 'red' } as React.CSSProperties}>
           <Button style={{ backgroundColor: 'var(--button-bg)' }}>
             Themed Button
           </Button>

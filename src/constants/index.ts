@@ -165,6 +165,7 @@ export const CONTACT_INFO: ContactInfo = {
   email: 'Infompbarbershop@gmail.com',
   socialMedia: {
     facebook: 'https://www.facebook.com/profile.php?id=61577771502632',
+    instagram: 'https://www.instagram.com/mpbarbershop.mt',
   },
 } as const;
 
@@ -216,34 +217,34 @@ export const TEAM_MEMBERS: readonly TeamMember[] = [
 export const TESTIMONIALS: readonly Testimonial[] = [
   {
     id: 'testimonial-1',
-    customerName: 'Michael R.',
+    customerName: 'Zef Borg',
     rating: 5,
-    comment: 'Best barbershop in town! The attention to detail is incredible. I won\'t go anywhere else.',
-    date: new Date('2024-01-15'),
+    comment: 'I\'ve been a client of Mario\'s for the past 2 years. When he left his previous barber station, I was saddened. Luckily, I tracked him down and was able to continue with his professional services. What a relief! Mario is not just a barber; he\'s passionate about everything he does, whether it\'s a haircut, grooming, or shave. I highly recommend him to anyone.',
+    date: new Date('2025-07-31'),
     verified: true,
   },
   {
     id: 'testimonial-2',
-    customerName: 'David L.',
+    customerName: 'David Bowers',
     rating: 5,
-    comment: 'Professional, modern, and always on point. MP Barbers never disappoints.',
-    date: new Date('2024-02-10'),
+    comment: 'Best barber experience in Malta, recently opened I have followed Mario\'s career from a young age. There is no one who compares his level of service and attention to detail in how you experience your time in his shop. This is a must have experience for anyone who enjoys relaxing at the Barber. Great with kids too',
+    date: new Date('2025-07-20'),
     verified: true,
   },
   {
     id: 'testimonial-3',
-    customerName: 'Robert K.',
+    customerName: 'Razvan Bustiuc',
     rating: 5,
-    comment: 'Clean, professional environment with skilled barbers. Highly recommend for quality service.',
-    date: new Date('2024-02-20'),
+    comment: 'I just went there this morning and had the best experience I had in a barber shop ever. From the haircut itself which was spot on to the fact that I was offered water or coffee the experience was really nice and I will definitely come back',
+    date: new Date('2025-08-20'),
     verified: true,
   },
   {
     id: 'testimonial-4',
-    customerName: 'Thomas M.',
+    customerName: 'Bernard Muscat',
     rating: 5,
-    comment: 'Consistently excellent service. The team knows their craft and pays attention to every detail.',
-    date: new Date('2024-03-01'),
+    comment: 'Great barber! Very professional, great with kids, and the prices are really reasonable. Always a smooth experience and a clean cut every time. Highly recommend!',
+    date: new Date('2025-08-23'),
     verified: true,
   },
 ] as const;

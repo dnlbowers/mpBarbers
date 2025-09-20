@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useCallback } from 'react';
+import React, { createContext, useContext, useReducer, useCallback, useMemo } from 'react';
 import type { NavigationTab, ContactFormData } from '../types';
 
 /**
@@ -225,7 +225,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     dispatch({ type: 'RESET_CONTACT_DATA' });
   }, []);
 
-  const value: AppContextValue = {
+  const value = useMemo<AppContextValue>(() => ({
     state,
     setActiveTab,
     toggleMobileMenu,
@@ -234,7 +234,16 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     setLoading,
     setError,
     resetContactData,
-  };
+  }), [
+    state,
+    setActiveTab,
+    toggleMobileMenu,
+    closeMobileMenu,
+    updateContactData,
+    setLoading,
+    setError,
+    resetContactData,
+  ]);
 
   return (
     <AppContext.Provider value={value}>

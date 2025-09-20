@@ -56,14 +56,10 @@ jest.mock('../hooks/usePerformance', () => ({
 describe('App Component', () => {
   let App: React.ComponentType;
   let mockUseApp: jest.Mock;
-  let mockUseWebVitals: jest.Mock;
-  let mockUseMemoryMonitor: jest.Mock;
 
   beforeEach(() => {
     App = require('../App').default;
     mockUseApp = require('../contexts/AppContext').useApp;
-    mockUseWebVitals = require('../hooks/usePerformance').useWebVitals;
-    mockUseMemoryMonitor = require('../hooks/usePerformance').useMemoryMonitor;
 
     // Set default mock return value
     mockUseApp.mockReturnValue({

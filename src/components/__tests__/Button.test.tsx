@@ -124,7 +124,7 @@ describe('Button Component', () => {
       expect(button).toHaveAttribute('aria-busy', 'true');
       
       // Should display loading spinner
-      const spinner = button.querySelector('svg');
+      const spinner = screen.getByRole('img', { hidden: true });
       expect(spinner).toBeInTheDocument();
       expect(spinner).toHaveClass('animate-spin');
     });
@@ -255,7 +255,7 @@ describe('Button Component', () => {
     test('loading spinner is hidden from screen readers', () => {
       render(<Button loading>Loading Button</Button>);
       
-      const spinner = screen.getByRole('button').querySelector('svg');
+      const spinner = screen.getByRole('img', { hidden: true });
       expect(spinner).toHaveAttribute('aria-hidden', 'true');
     });
 
@@ -370,7 +370,7 @@ describe('Button Component', () => {
       expect(button).toHaveAttribute('aria-busy', 'true');
       
       // Should show loading spinner
-      const spinner = button.querySelector('svg');
+      const spinner = screen.getByRole('img', { hidden: true });
       expect(spinner).toBeInTheDocument();
     });
 
@@ -473,7 +473,7 @@ describe('Button Component', () => {
     test('loading spinner has correct animation classes', () => {
       render(<Button loading>Loading</Button>);
       
-      const spinner = screen.getByRole('button').querySelector('svg');
+      const spinner = screen.getByRole('img', { hidden: true });
       expect(spinner).toHaveClass('animate-spin');
     });
 

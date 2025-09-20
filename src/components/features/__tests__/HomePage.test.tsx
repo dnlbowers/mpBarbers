@@ -123,10 +123,8 @@ describe('HomePage Component', () => {
       card.getAttribute('aria-label')?.includes('Book')
     );
     
-    if (firstServiceCard) {
-      await user.click(firstServiceCard);
-      expect(firstServiceCard).toBeInTheDocument();
-    }
+    expect(firstServiceCard).toBeInTheDocument();
+    await user.click(firstServiceCard);
   });
 
   test('handles keyboard navigation on service cards', async () => {
@@ -141,13 +139,11 @@ describe('HomePage Component', () => {
       card.getAttribute('aria-label')?.includes('Book')
     );
     
-    if (firstServiceCard) {
-      fireEvent.keyDown(firstServiceCard, { key: 'Enter' });
-      expect(firstServiceCard).toBeInTheDocument();
-      
-      fireEvent.keyDown(firstServiceCard, { key: ' ' });
-      expect(firstServiceCard).toBeInTheDocument();
-    }
+    expect(firstServiceCard).toBeInTheDocument();
+    fireEvent.keyDown(firstServiceCard, { key: 'Enter' });
+
+    fireEvent.keyDown(firstServiceCard, { key: ' ' });
+    expect(firstServiceCard).toBeInTheDocument();
   });
 
   test('handles View All Services button click', async () => {

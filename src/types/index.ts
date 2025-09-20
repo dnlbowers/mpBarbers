@@ -117,6 +117,7 @@ export interface BaseComponentProps {
   readonly id?: string;
   readonly 'aria-label'?: string;
   readonly style?: React.CSSProperties;
+  readonly role?: string;
 }
 
 export interface ButtonProps extends BaseComponentProps {
@@ -126,6 +127,11 @@ export interface ButtonProps extends BaseComponentProps {
   readonly loading?: boolean;
   readonly onClick?: () => void;
   readonly type?: 'button' | 'submit' | 'reset';
+  readonly onMouseEnter?: () => void;
+  readonly onMouseLeave?: () => void;
+  readonly onFocus?: () => void;
+  readonly title?: string;
+  readonly 'data-testid'?: string;
 }
 
 export interface InputProps extends BaseComponentProps {

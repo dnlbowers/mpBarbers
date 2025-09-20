@@ -39,8 +39,11 @@ if (!global.performance) {
 // BROWSER APIS: Mock browser-specific APIs
 if (!global.IntersectionObserver) {
   global.IntersectionObserver = class IntersectionObserver {
-    constructor(_callback: IntersectionObserverCallback, _options?: IntersectionObserverInit) {
-      // Mock constructor - no implementation needed for tests
+    constructor(callback: any, options?: any) {
+      // Mock constructor with minimal implementation
+      if (callback && options) {
+        // Parameters are acknowledged but not used in mock
+      }
     }
     observe(_target: Element): void {
       // Mock observe - no implementation needed for tests
@@ -56,10 +59,13 @@ if (!global.IntersectionObserver) {
 
 if (!global.ResizeObserver) {
   global.ResizeObserver = class ResizeObserver {
-    constructor(_callback: ResizeObserverCallback) {
-      // Mock constructor - no implementation needed for tests
+    constructor(callback: any) {
+      // Mock constructor with minimal implementation
+      if (callback) {
+        // Parameter is acknowledged but not used in mock
+      }
     }
-    observe(_target: Element, _options?: ResizeObserverOptions): void {
+    observe(_target: Element, _options?: any): void {
       // Mock observe - no implementation needed for tests
     }
     unobserve(_target: Element): void {

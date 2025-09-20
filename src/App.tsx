@@ -4,14 +4,13 @@
  */
 
 import React from 'react';
-import { AppProvider } from './contexts/AppContext';
+import { AppProvider, useApp } from './contexts/AppContext';
 import Layout from './components/layout/Layout';
 import HomePage from './components/features/HomePage';
 import AboutPage from './components/features/AboutPage';
 import ServicesPage from './components/features/ServicesPage';
 import ContactPage from './components/features/ContactPage';
 import ErrorBoundary from './components/ui/ErrorBoundary';
-import { useApp } from './contexts/AppContext';
 
 // Router component (simplified for this example)
 const AppRouter: React.FC = () => {

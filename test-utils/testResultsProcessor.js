@@ -287,11 +287,26 @@ function writeTestReport(summary) {
 }
 
 /**
+ * Gets CSS class based on pass rate
+ *
+ * @description Helper function to determine the appropriate CSS class
+ * for pass rate display based on performance thresholds.
+ *
+ * @param {number} passRate - The test pass rate percentage
+ * @returns {string} CSS class name
+ */
+function getPassRateClass(passRate) {
+  if (passRate >= 90) return 'success';
+  if (passRate >= 70) return 'warning';
+  return 'danger';
+}
+
+/**
  * Generates HTML report from test summary
- * 
+ *
  * @description Creates a formatted HTML report for easy viewing
  * of test results and metrics in web browsers.
- * 
+ *
  * @param {Object} summary - Test execution summary object
  * @returns {string} HTML report string
  */
@@ -332,7 +347,7 @@ function generateHTMLReport(summary) {
         </div>
         <div class="metric">
           <h3>Pass Rate</h3>
-          <p class="${execution.passRate >= 90 ? 'success' : execution.passRate >= 70 ? 'warning' : 'danger'}">${execution.passRate}%</p>
+          <p class="${getPassRateClass(execution.passRate)}">${execution.passRate}%</p>
         </div>
         <div class="metric">
           <h3>Execution Time</h3>

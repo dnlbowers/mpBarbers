@@ -10,7 +10,6 @@ import React from 'react';
 import { renderHook, act } from '@testing-library/react';
 import { AppProvider, useApp } from '../AppContext';
 import { mockDataFactory } from '../../__tests__/testUtils';
-import type { NavigationTab } from '../../types';
 
 // Wrapper component for testing hooks that require context
 const createWrapper = () => {
@@ -31,9 +30,9 @@ describe('App Context', () => {
       const originalConsoleError = console.error;
       console.error = jest.fn();
 
-      expect(() => {
-        renderHook(() => useApp());
-      }).toThrow('useApp must be used within an AppProvider');
+      const renderHookWithoutProvider = () => renderHook(() => useApp());
+
+      expect(renderHookWithoutProvider).toThrow('useApp must be used within an AppProvider');
 
       // Restore console.error
       console.error = originalConsoleError;

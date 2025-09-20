@@ -39,19 +39,35 @@ if (!global.performance) {
 // BROWSER APIS: Mock browser-specific APIs
 if (!global.IntersectionObserver) {
   global.IntersectionObserver = class IntersectionObserver {
-    constructor() {}
-    observe() {}
-    unobserve() {}
-    disconnect() {}
+    constructor(_callback: IntersectionObserverCallback, _options?: IntersectionObserverInit) {
+      // Mock constructor - no implementation needed for tests
+    }
+    observe(_target: Element): void {
+      // Mock observe - no implementation needed for tests
+    }
+    unobserve(_target: Element): void {
+      // Mock unobserve - no implementation needed for tests
+    }
+    disconnect(): void {
+      // Mock disconnect - no implementation needed for tests
+    }
   } as any;
 }
 
 if (!global.ResizeObserver) {
   global.ResizeObserver = class ResizeObserver {
-    constructor() {}
-    observe() {}
-    unobserve() {}
-    disconnect() {}
+    constructor(_callback: ResizeObserverCallback) {
+      // Mock constructor - no implementation needed for tests
+    }
+    observe(_target: Element, _options?: ResizeObserverOptions): void {
+      // Mock observe - no implementation needed for tests
+    }
+    unobserve(_target: Element): void {
+      // Mock unobserve - no implementation needed for tests
+    }
+    disconnect(): void {
+      // Mock disconnect - no implementation needed for tests
+    }
   } as any;
 }
 
@@ -143,9 +159,15 @@ Object.defineProperty(global, 'HTMLDialogElement', {
       }
     }
 
-    addEventListener() {}
-    removeEventListener() {}
-    dispatchEvent() { return true; }
+    addEventListener(_type: string, _listener: EventListener): void {
+      // Mock addEventListener - no implementation needed for tests
+    }
+    removeEventListener(_type: string, _listener: EventListener): void {
+      // Mock removeEventListener - no implementation needed for tests
+    }
+    dispatchEvent(_event: Event): boolean {
+      return true;
+    }
   },
   writable: true,
   configurable: true

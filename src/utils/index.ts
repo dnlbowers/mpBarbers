@@ -117,7 +117,7 @@ export const isValidPhoneNumber = (phone: string): boolean => {
   // Remove common formatting characters
   const cleanPhone = phone.replace(/[\s\-().+]/g, '');
   // Accept numbers with 7-15 digits
-  const phoneRegex = /^[\d]{7,15}$/;
+  const phoneRegex = /^\d{7,15}$/;
   return phoneRegex.test(cleanPhone);
 };
 
@@ -134,20 +134,36 @@ export const isValidPhoneNumber = (phone: string): boolean => {
 export const sanitizeString = (input: string): string => {
   return input
     .trim()
-    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
-    .replace(/<[^>]*>/g, '');
+    .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
+    .replace(/[&<>"'`=/]/g, (char) => {
+      const escapeMap: { [key: string]: string } = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;',
+        '`': '&#96;',
+        '=': '&#61;',
+        '/': '&#47;',
+      };
+      return escapeMap[char] || char;
+    });
 };
 
 /**
  * Unique ID Generator
- * 
- * @description Generates unique identifiers using timestamp and random
- * components for reliable unique ID creation in client-side operations.
- * 
+ *
+ * @description Generates unique identifiers using timestamp and cryptographically
+ * secure random components for reliable unique ID creation in client-side operations.
+ *
  * @returns Unique string identifier
  */
 export const generateId = (): string => {
-  return Date.now().toString(36) + Math.random().toString(36).substr(2);
+  const timestamp = Date.now().toString(36);
+  const randomBytes = new Uint8Array(6);
+  crypto.getRandomValues(randomBytes);
+  const randomString = Array.from(randomBytes, byte => byte.toString(36)).join('');
+  return timestamp + randomString;
 };
 
 /**

@@ -68,10 +68,12 @@ export const useAnalytics = () => {
     if (process.env.NODE_ENV === 'development' && !ENABLE_PERFORMANCE_MONITORING) {
       return;
     }
-      // TODO: In production, pick one and send to your analytics service
-      // gtag('event', event, properties);
-      // mixpanel.track(event, properties);
-      // amplitude.logEvent(event, properties);   
+      /* TODO: In production, pick one and send to a analytics service: 
+        * gtag('event', event, properties);
+        * mixpanel.track(event, properties);
+        * amplitude.logEvent(event, properties);  
+        * Any others to consider? 
+      */
     try {
       
       console.log(`[Analytics] ${event}`, properties);

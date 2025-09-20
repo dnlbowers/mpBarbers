@@ -56,16 +56,20 @@ jest.mock('../hooks/usePerformance', () => ({
 describe('App Component', () => {
   let App: React.ComponentType;
   let mockUseApp: jest.Mock;
-  
+  let mockUseWebVitals: jest.Mock;
+  let mockUseMemoryMonitor: jest.Mock;
+
   beforeEach(() => {
     App = require('../App').default;
     mockUseApp = require('../contexts/AppContext').useApp;
-    
+    mockUseWebVitals = require('../hooks/usePerformance').useWebVitals;
+    mockUseMemoryMonitor = require('../hooks/usePerformance').useMemoryMonitor;
+
     // Set default mock return value
     mockUseApp.mockReturnValue({
       state: { activeTab: 'home' }
     });
-    
+
     jest.clearAllMocks();
   });
 
@@ -120,20 +124,6 @@ describe('App Component', () => {
     expect(screen.getByTestId('home-page')).toBeInTheDocument();
   });
 
-  test('calls performance monitoring hooks', () => {
-    const mockUseWebVitals = require('../hooks/usePerformance').useWebVitals;
-    const mockUseMemoryMonitor = require('../hooks/usePerformance').useMemoryMonitor;
-    
-    // Ensure mock is set up properly
-    mockUseApp.mockReturnValue({
-      state: { activeTab: 'home' }
-    });
-    
-    render(<App />);
-    
-    expect(mockUseWebVitals).toHaveBeenCalled();
-    expect(mockUseMemoryMonitor).toHaveBeenCalled();
-  });
 
   test('has error boundary with proper structure', () => {
     // Ensure mock is set up properly

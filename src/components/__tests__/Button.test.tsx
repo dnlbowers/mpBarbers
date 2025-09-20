@@ -6,9 +6,8 @@
  * component meets WCAG 2.1 AA standards and business requirements.
  */
 
-import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { renderWithA11yTesting, runAxeTest } from '../../__tests__/testUtils';
+import { renderWithA11yTesting } from '../../__tests__/testUtils';
 import Button from '../ui/Button';
 
 describe('Button Component', () => {

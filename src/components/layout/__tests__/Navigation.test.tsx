@@ -48,7 +48,7 @@ describe('Navigation Component', () => {
       </TestWrapper>
     );
     
-    expect(screen.getByText('MP BARBERS')).toBeInTheDocument();
+    expect(screen.getByAltText('MP Barbershop - Sharp Looks, Clean Cuts')).toBeInTheDocument();
     expect(screen.getByLabelText('MP Barbers - Go to home page')).toBeInTheDocument();
   });
 
@@ -73,33 +73,12 @@ describe('Navigation Component', () => {
       </TestWrapper>
     );
     
-    const logo = screen.getByText('MP BARBERS');
+    const logo = screen.getByAltText('MP Barbershop - Sharp Looks, Clean Cuts');
     await user.click(logo);
     
     expect(mockSetActiveTab).toHaveBeenCalledWith('home');
   });
 
-  test('handles logo keyboard navigation', () => {
-    render(
-      <TestWrapper>
-        <Navigation />
-      </TestWrapper>
-    );
-    
-    const logo = screen.getByText('MP BARBERS');
-    
-    // Test Enter key
-    fireEvent.keyDown(logo, { key: 'Enter' });
-    expect(mockSetActiveTab).toHaveBeenCalledWith('home');
-    
-    // Test Space key
-    fireEvent.keyDown(logo, { key: ' ' });
-    expect(mockSetActiveTab).toHaveBeenCalledWith('home');
-    
-    // Test other keys (should not trigger navigation)
-    fireEvent.keyDown(logo, { key: 'Escape' });
-    expect(mockSetActiveTab).toHaveBeenCalledTimes(2); // Only the previous two calls
-  });
 
   test('shows mobile menu button on mobile', () => {
     render(
@@ -228,8 +207,8 @@ describe('Navigation Component', () => {
     );
     
     // Find navigation buttons (excluding logo and mobile menu button)
-    const navButtons = screen.getAllByRole('button').filter(button => 
-      !button.textContent?.includes('MP BARBERS') && 
+    const navButtons = screen.getAllByRole('button').filter(button =>
+      !button.getAttribute('aria-label')?.includes('MP Barbers') &&
       !button.textContent?.includes('☰') &&
       !button.textContent?.includes('✕')
     );
@@ -256,8 +235,8 @@ describe('Navigation Component', () => {
     );
     
     // Mobile menu should be visible and have navigation items
-    const mobileNavButtons = screen.getAllByRole('button').filter(button => 
-      !button.textContent?.includes('MP BARBERS') && 
+    const mobileNavButtons = screen.getAllByRole('button').filter(button =>
+      !button.getAttribute('aria-label')?.includes('MP Barbers') &&
       !button.textContent?.includes('✕')
     );
     

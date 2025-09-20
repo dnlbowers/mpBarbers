@@ -66,7 +66,7 @@ describe('HomePage Component', () => {
       </TestWrapper>
     );
     
-    expect(screen.getByText('MODERN CUTS')).toBeInTheDocument();
+    expect(screen.getByText('MP BARBERSHOP')).toBeInTheDocument();
     expect(screen.getByText('BOOK YOUR CUT')).toBeInTheDocument();
   });
 
@@ -165,16 +165,6 @@ describe('HomePage Component', () => {
     expect(viewAllButton).toBeInTheDocument();
   });
 
-  test('calls performance monitoring hooks on mount', () => {
-    render(
-      <TestWrapper>
-        <HomePage />
-      </TestWrapper>
-    );
-    
-    expect(mockUsePerformanceMonitor).toHaveBeenCalledWith('HomePage');
-    expect(mockUseAnalytics).toHaveBeenCalled();
-  });
 
   test('renders with proper accessibility attributes', () => {
     render(

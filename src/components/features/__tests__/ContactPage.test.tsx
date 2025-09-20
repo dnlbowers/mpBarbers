@@ -14,6 +14,7 @@ global.alert = jest.fn();
 
 // Mock emailjs
 jest.mock('@emailjs/browser', () => ({
+  init: jest.fn(),
   send: jest.fn().mockResolvedValue({ status: 200, text: 'OK' })
 }));
 
@@ -40,7 +41,11 @@ const TestWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
 describe('ContactPage Component', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    
+
+    // Mock EmailJS properly
+    const emailjs = require('@emailjs/browser');
+    emailjs.send.mockResolvedValue({ status: 200, text: 'OK' });
+
     // Default mock implementation
     mockUseFormValidation.mockReturnValue({
       data: {
@@ -150,9 +155,9 @@ describe('ContactPage Component', () => {
     
     expect(mockValidate).toHaveBeenCalled();
     
-    // Wait for the async submission to complete
+    // Wait for the async submission to complete and modal to appear
     await waitFor(() => {
-      expect(global.alert).toHaveBeenCalledWith('Message sent successfully! We\'ll get back to you soon.');
+      expect(screen.getByText('Message Sent!')).toBeInTheDocument();
     }, { timeout: 2000 });
     
     expect(mockReset).toHaveBeenCalled();

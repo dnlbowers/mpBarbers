@@ -48,11 +48,9 @@ describe('App Context', () => {
       expect(result.current.setActiveTab).toBeDefined();
       expect(result.current.toggleMobileMenu).toBeDefined();
       expect(result.current.closeMobileMenu).toBeDefined();
-      expect(result.current.updateBookingData).toBeDefined();
       expect(result.current.updateContactData).toBeDefined();
       expect(result.current.setLoading).toBeDefined();
       expect(result.current.setError).toBeDefined();
-      expect(result.current.resetBookingData).toBeDefined();
       expect(result.current.resetContactData).toBeDefined();
     });
   });
@@ -71,18 +69,7 @@ describe('App Context', () => {
       expect(result.current.state.mobileMenuOpen).toBe(false);
       expect(result.current.state.loading).toBe(false);
       expect(result.current.state.error).toBe(null);
-      
-      // Booking data should be empty
-      expect(result.current.state.bookingData).toEqual({
-        service: '',
-        date: '',
-        time: '',
-        fullName: '',
-        email: '',
-        phoneNumber: '',
-        specialRequests: '',
-      });
-      
+
       // Contact data should be empty
       expect(result.current.state.contactData).toEqual({
         name: '',
@@ -104,10 +91,10 @@ describe('App Context', () => {
       });
 
       act(() => {
-        result.current.setActiveTab('booking');
+        result.current.setActiveTab('services');
       });
 
-      expect(result.current.state.activeTab).toBe('booking');
+      expect(result.current.state.activeTab).toBe('services');
     });
 
     test('setActiveTab closes mobile menu', () => {
@@ -172,79 +159,76 @@ describe('App Context', () => {
     });
   });
 
-  describe('Form Data Management', () => {
+  describe('Contact Data Management', () => {
     /**
-     * Tests form data persistence and updates
-     * @description Ensures proper form state management across navigation
+     * Tests contact form data persistence and updates
+     * @description Ensures proper contact form state management across navigation
      */
-    test('updateBookingData merges partial data', () => {
+    test('updateContactData merges partial data', () => {
       const { result } = renderHook(() => useApp(), {
         wrapper: createWrapper(),
       });
 
       act(() => {
-        result.current.updateBookingData({
-          service: 'classic-cut',
-          date: '2024-03-15',
+        result.current.updateContactData({
+          name: 'John Doe',
+          email: 'john@example.com',
         });
       });
 
-      expect(result.current.state.bookingData.service).toBe('classic-cut');
-      expect(result.current.state.bookingData.date).toBe('2024-03-15');
-      expect(result.current.state.bookingData.fullName).toBe(''); // Should remain empty
+      expect(result.current.state.contactData.name).toBe('John Doe');
+      expect(result.current.state.contactData.email).toBe('john@example.com');
+      expect(result.current.state.contactData.message).toBe(''); // Should remain empty
     });
 
-    test('updateBookingData preserves existing data', () => {
+    test('updateContactData preserves existing data', () => {
       const { result } = renderHook(() => useApp(), {
         wrapper: createWrapper(),
       });
 
       // First update
       act(() => {
-        result.current.updateBookingData({
-          service: 'classic-cut',
-          fullName: 'John Doe',
+        result.current.updateContactData({
+          name: 'John Doe',
+          email: 'john@example.com',
         });
       });
 
       // Second update
       act(() => {
-        result.current.updateBookingData({
-          date: '2024-03-15',
+        result.current.updateContactData({
+          message: 'Hello world',
         });
       });
 
-      expect(result.current.state.bookingData.service).toBe('classic-cut');
-      expect(result.current.state.bookingData.fullName).toBe('John Doe');
-      expect(result.current.state.bookingData.date).toBe('2024-03-15');
+      expect(result.current.state.contactData.name).toBe('John Doe');
+      expect(result.current.state.contactData.email).toBe('john@example.com');
+      expect(result.current.state.contactData.message).toBe('Hello world');
     });
 
-    test('resetBookingData clears all booking data', () => {
+    test('resetContactData clears all contact data', () => {
       const { result } = renderHook(() => useApp(), {
         wrapper: createWrapper(),
       });
 
       // First populate data
       act(() => {
-        result.current.updateBookingData(mockDataFactory.bookingFormData());
+        result.current.updateContactData(mockDataFactory.contactFormData());
       });
 
-      expect(result.current.state.bookingData.service).toBe('classic-cut');
-      expect(result.current.state.bookingData.fullName).toBe('John Doe');
+      expect(result.current.state.contactData.name).toBe('Jane Smith');
+      expect(result.current.state.contactData.email).toBe('jane.smith@example.com');
 
       // Then reset
       act(() => {
-        result.current.resetBookingData();
+        result.current.resetContactData();
       });
 
-      expect(result.current.state.bookingData).toEqual({
-        service: '',
-        date: '',
-        time: '',
-        fullName: '',
+      expect(result.current.state.contactData).toEqual({
+        name: '',
         email: '',
         phoneNumber: '',
-        specialRequests: '',
+        message: '',
       });
     });
   });
@@ -325,20 +309,20 @@ describe('App Context', () => {
       });
 
       const originalState = result.current.state;
-      const originalBookingData = result.current.state.bookingData;
+      const originalContactData = result.current.state.contactData;
 
       act(() => {
-        result.current.updateBookingData({ service: 'classic-cut' });
+        result.current.updateContactData({ name: 'John Doe' });
       });
 
       // State should be a new object
       expect(result.current.state).not.toBe(originalState);
-      
-      // Booking data should be a new object
-      expect(result.current.state.bookingData).not.toBe(originalBookingData);
-      
+
+      // Contact data should be a new object
+      expect(result.current.state.contactData).not.toBe(originalContactData);
+
       // But the structure should be maintained
-      expect(result.current.state.bookingData.service).toBe('classic-cut');
+      expect(result.current.state.contactData.name).toBe('John Doe');
     });
   });
 });

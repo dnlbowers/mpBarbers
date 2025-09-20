@@ -12,11 +12,23 @@ import ContactPage from '../ContactPage';
 // Mock window.alert
 global.alert = jest.fn();
 
+// Mock emailjs
+jest.mock('@emailjs/browser', () => ({
+  send: jest.fn().mockResolvedValue({ status: 200, text: 'OK' })
+}));
+
 // Mock the entire hooks module
 const mockUseFormValidation = jest.fn();
 
 jest.mock('../../../hooks', () => ({
   useFormValidation: (...args: any[]) => mockUseFormValidation(...args),
+}));
+
+// Mock useModalDialog hook to avoid HTMLDialogElement issues
+jest.mock('../../../hooks/useModalDialog', () => ({
+  useModalDialog: () => ({
+    dialogRef: { current: null }
+  })
 }));
 
 const TestWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
@@ -210,8 +222,8 @@ describe('ContactPage Component', () => {
       </TestWrapper>
     );
     
-    expect(screen.getByText('Monday - Friday: 9:00 AM - 6:00 PM')).toBeInTheDocument();
-    expect(screen.getByText('Saturday: 9:00 AM - 5:00 PM')).toBeInTheDocument();
+    expect(screen.getByText('Tuesday: 8:30 AM - 1:00 PM, 2:00 PM - 7:00 PM')).toBeInTheDocument();
+    expect(screen.getByText('Saturday: 8:30 AM - 1:00 PM, 2:00 PM - 7:00 PM')).toBeInTheDocument();
     expect(screen.getByText('Sunday: Closed')).toBeInTheDocument();
   });
 

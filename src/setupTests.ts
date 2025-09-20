@@ -107,6 +107,46 @@ Object.defineProperty(global, 'matchMedia', {
 // FETCH API: Mock fetch for API testing
 global.fetch = jest.fn();
 
+// WINDOW METHODS: Mock window methods for testing
+Object.defineProperty(global, 'scrollTo', {
+  value: jest.fn(),
+  writable: true
+});
+
 // URL: Mock URL constructor
 global.URL.createObjectURL = jest.fn();
 global.URL.revokeObjectURL = jest.fn();
+
+// DIALOG ELEMENT: Mock HTMLDialogElement for modal tests
+Object.defineProperty(global, 'HTMLDialogElement', {
+  value: class HTMLDialogElement {
+    open: boolean = false;
+    returnValue: string = '';
+
+    constructor() {
+      this.open = false;
+      this.returnValue = '';
+    }
+
+    showModal() {
+      this.open = true;
+    }
+
+    show() {
+      this.open = true;
+    }
+
+    close(returnValue?: string) {
+      this.open = false;
+      if (returnValue !== undefined) {
+        this.returnValue = returnValue;
+      }
+    }
+
+    addEventListener() {}
+    removeEventListener() {}
+    dispatchEvent() { return true; }
+  },
+  writable: true,
+  configurable: true
+});

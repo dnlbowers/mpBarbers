@@ -6,16 +6,16 @@
 describe('Features Index Exports', () => {
   test('should export all feature components', () => {
     const featuresIndex = require('../index');
-    
+
     expect(featuresIndex.HomePage).toBeDefined();
     expect(featuresIndex.AboutPage).toBeDefined();
-    expect(featuresIndex.BookingPage).toBeDefined();
+    expect(featuresIndex.ServicesPage).toBeDefined();
     expect(featuresIndex.ContactPage).toBeDefined();
-    
-    // Verify they are actual functions/components
-    expect(typeof featuresIndex.HomePage).toBe('function');
-    expect(typeof featuresIndex.AboutPage).toBe('function');
-    expect(typeof featuresIndex.BookingPage).toBe('function');
-    expect(typeof featuresIndex.ContactPage).toBe('function');
+
+    // Verify they are actual functions/components (could be object due to React.memo)
+    expect(['function', 'object']).toContain(typeof featuresIndex.HomePage);
+    expect(['function', 'object']).toContain(typeof featuresIndex.AboutPage);
+    expect(['function', 'object']).toContain(typeof featuresIndex.ServicesPage);
+    expect(['function', 'object']).toContain(typeof featuresIndex.ContactPage);
   });
 });

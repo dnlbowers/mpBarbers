@@ -1,6 +1,6 @@
 /**
  * Comprehensive Coverage Tests
- * 
+ *
  * @description Single file with all component coverage tests
  * designed to be simple, reliable, and provide good coverage
  */
@@ -17,10 +17,11 @@ jest.mock('../hooks/usePerformance', () => ({
   usePerformanceMonitor: jest.fn(),
 }));
 
-// Mock booking service
-jest.mock('../services/bookingService', () => ({
-  submitBooking: jest.fn().mockResolvedValue({ id: 'test', success: true }),
-  getAvailableSlots: jest.fn().mockResolvedValue(['09:00', '10:00']),
+// Mock useModalDialog hook to avoid HTMLDialogElement issues
+jest.mock('../hooks/useModalDialog', () => ({
+  useModalDialog: () => ({
+    dialogRef: { current: null }
+  })
 }));
 
 const TestWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
@@ -29,239 +30,203 @@ const TestWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   </AppProvider>
 );
 
-describe('Comprehensive Coverage Tests', () => {
-  
-  /**
-   * App Component Tests
-   */
-  describe('App Component', () => {
-    test('App component can be imported', () => {
-      const App = require('../App').default;
-      expect(App).toBeDefined();
-      expect(typeof App).toBe('function');
-    });
+describe('Comprehensive Component Coverage', () => {
+  beforeEach(() => {
+    // Reset mocks
+    jest.clearAllMocks();
   });
 
-  /**
-   * UI Components Tests
-   */
   describe('UI Components', () => {
-    test('Button component works with all variants', () => {
+    test('Button component renders and handles clicks', () => {
+      const mockClick = jest.fn();
       const Button = require('../components/ui/Button').default;
-      
-      render(<Button>Test Button</Button>);
-      render(<Button variant="primary">Primary</Button>);
-      render(<Button variant="secondary">Secondary</Button>);
-      render(<Button variant="outline">Outline</Button>);
-      render(<Button variant="ghost">Ghost</Button>);
-      render(<Button size="sm">Small</Button>);
-      render(<Button size="lg">Large</Button>);
-      render(<Button disabled>Disabled</Button>);
-      render(<Button loading>Loading</Button>);
-      
-      const handleClick = jest.fn();
-      render(<Button onClick={handleClick}>Clickable</Button>);
+
+      render(
+        <Button onClick={mockClick}>
+          Test Button
+        </Button>
+      );
+
+      const button = screen.getByRole('button', { name: /test button/i });
+      expect(button).toBeInTheDocument();
+
+      fireEvent.click(button);
+      expect(mockClick).toHaveBeenCalledTimes(1);
     });
 
-    test('Input component renders with different props', () => {
-      const Input = require('../components/ui/Input').default;
-      
-      render(<Input />);
-      render(<Input type="email" />);
-      render(<Input type="password" />);
-      render(<Input placeholder="Test placeholder" />);
-      render(<Input disabled />);
-      render(<Input required />);
-      
-      const handleChange = jest.fn();
-      render(<Input onChange={handleChange} />);
-    });
-
-    test('Loading component renders with different sizes', () => {
-      const Loading = require('../components/ui/Loading').default;
-      
-      render(<Loading />);
-      render(<Loading size="sm" />);
-      render(<Loading size="lg" />);
-      render(<Loading message="Custom message" />);
-    });
-
-    test('Card component renders children', () => {
+    test('Card component renders content', () => {
       const Card = require('../components/ui/Card').default;
-      
+
       render(
         <Card>
-          <div>Test content</div>
+          <div>Test Card Content</div>
         </Card>
       );
-      
-      render(
-        <Card className="custom-class">
-          <span>Custom card</span>
-        </Card>
-      );
+
+      expect(screen.getByText('Test Card Content')).toBeInTheDocument();
     });
 
-    test('ErrorBoundary renders children normally', () => {
-      const ErrorBoundary = require('../components/ui/ErrorBoundary').default;
-      
+    test('Modal component shows and hides', () => {
+      const mockClose = jest.fn();
+      const Modal = require('../components/ui/Modal').default;
+
       render(
-        <ErrorBoundary>
-          <div>Normal content</div>
-        </ErrorBoundary>
+        <Modal
+          isOpen={true}
+          onClose={mockClose}
+          message="Test modal message"
+        />
       );
+
+      expect(screen.getByText('Test modal message')).toBeInTheDocument();
+    });
+
+    test('Input component handles changes', async () => {
+      const user = userEvent.setup();
+      const mockChange = jest.fn();
+      const Input = require('../components/ui/Input').default;
+
+      render(
+        <Input
+          value=""
+          onChange={mockChange}
+          placeholder="Test input"
+        />
+      );
+
+      const input = screen.getByPlaceholderText('Test input');
+      await user.type(input, 'test');
+
+      expect(mockChange).toHaveBeenCalled();
     });
   });
 
-  /**
-   * Layout Components Tests
-   */
-  describe('Layout Components', () => {
-    test('Layout component renders children', () => {
-      const Layout = require('../components/layout/Layout').default;
-      
+  describe('Feature Components', () => {
+    test('HomePage renders main sections', () => {
+      const HomePage = require('../components/features/HomePage').default;
+
       render(
         <TestWrapper>
-          <Layout>
-            <div>Test content</div>
-          </Layout>
+          <HomePage />
         </TestWrapper>
       );
+
+      expect(screen.getByText(/MP BARBERSHOP/i)).toBeInTheDocument();
+      expect(screen.getByText(/OUR SERVICES/i)).toBeInTheDocument();
     });
 
-    test('Navigation component renders', () => {
-      const Navigation = require('../components/layout/Navigation').default;
-      
-      render(
-        <TestWrapper>
-          <Navigation />
-        </TestWrapper>
-      );
-    });
-
-    test('Footer component renders', () => {
-      const Footer = require('../components/layout/Footer').default;
-      
-      render(<Footer />);
-    });
-  });
-
-  /**
-   * Page Components Tests
-   */
-  describe('Page Components', () => {
-    test('AboutPage component renders', () => {
+    test('AboutPage renders content', () => {
       const AboutPage = require('../components/features/AboutPage').default;
-      
+
       render(
         <TestWrapper>
           <AboutPage />
         </TestWrapper>
       );
+
+      expect(screen.getByText(/ABOUT MP BARBERS/i)).toBeInTheDocument();
     });
 
-    test('ContactPage component renders', () => {
+    test('ServicesPage renders services', () => {
+      const ServicesPage = require('../components/features/ServicesPage').default;
+
+      render(
+        <TestWrapper>
+          <ServicesPage />
+        </TestWrapper>
+      );
+
+      expect(screen.getByText(/SERVICE MENU/i)).toBeInTheDocument();
+    });
+
+    test('ContactPage renders form', () => {
       const ContactPage = require('../components/features/ContactPage').default;
-      
+
       render(
         <TestWrapper>
           <ContactPage />
         </TestWrapper>
       );
-    });
 
-    test('page components are importable', () => {
-      const HomePage = require('../components/features/HomePage').default;
-      const BookingPage = require('../components/features/BookingPage').default;
-      
-      expect(HomePage).toBeDefined();
-      expect(BookingPage).toBeDefined();
+      expect(screen.getByText(/GET IN TOUCH/i)).toBeInTheDocument();
+      expect(screen.getByText(/Send a Message/i)).toBeInTheDocument();
     });
   });
 
-  /**
-   * Utils Tests (Basic Coverage)
-   */
-  describe('Utils Functions', () => {
-    test('utility functions are importable and work', () => {
-      const utils = require('../utils/index');
-      
-      expect(utils.isValidEmail).toBeDefined();
-      expect(utils.isValidPhoneNumber).toBeDefined();
-      expect(utils.formatPrice).toBeDefined();
-      expect(utils.formatDuration).toBeDefined();
-      
-      // Test some basic functionality
-      expect(utils.isValidEmail('test@example.com')).toBe(true);
-      expect(utils.isValidEmail('invalid')).toBe(false);
-      
-      expect(typeof utils.formatPrice(100)).toBe('string');
-      expect(typeof utils.formatDuration(60)).toBe('string');
-    });
-  });
-
-  /**
-   * Constants Tests
-   */
-  describe('Constants', () => {
-    test('constants are defined', () => {
-      const constants = require('../constants/index');
-      
-      expect(constants.SERVICES).toBeDefined();
-      expect(constants.BUSINESS_HOURS).toBeDefined();
-      expect(Array.isArray(constants.SERVICES)).toBe(true);
-    });
-  });
-
-  /**
-   * Types Tests
-   */
-  describe('Types', () => {
-    test('types module is importable', () => {
-      const types = require('../types/index');
-      expect(types).toBeDefined();
-    });
-  });
-
-  /**
-   * Index Files Tests
-   */
-  describe('Index Files', () => {
-    test('component index files are importable', () => {
-      const uiIndex = require('../components/ui/index');
-      const layoutIndex = require('../components/layout/index');
-      const featuresIndex = require('../components/features/index');
-      
-      expect(uiIndex).toBeDefined();
-      expect(layoutIndex).toBeDefined();
-      expect(featuresIndex).toBeDefined();
-    });
-
-    test('hooks index is importable', () => {
-      const hooksIndex = require('../hooks/index');
-      expect(hooksIndex).toBeDefined();
-    });
-  });
-
-  /**
-   * Context Integration Test
-   */
-  describe('Context Integration', () => {
-    test('context provides state and dispatch', () => {
-      const { useApp } = require('../contexts/AppContext');
-      
-      const TestComponent = () => {
-        const { state } = useApp();
-        return <div data-testid="active-tab">{state.activeTab}</div>;
-      };
+  describe('Layout Components', () => {
+    test('Navigation renders menu items', () => {
+      const Navigation = require('../components/layout/Navigation').default;
 
       render(
         <TestWrapper>
-          <TestComponent />
+          <Navigation />
         </TestWrapper>
       );
 
-      expect(screen.getByTestId('active-tab')).toBeInTheDocument();
+      expect(screen.getByLabelText(/main navigation/i)).toBeInTheDocument();
+    });
+
+    test('Footer renders contact info', () => {
+      const Footer = require('../components/layout/Footer').default;
+
+      render(<Footer />);
+
+      expect(screen.getByRole('heading', { name: /MP BARBERS/i })).toBeInTheDocument();
+    });
+
+    test('Layout renders children', () => {
+      const Layout = require('../components/layout/Layout').default;
+
+      render(
+        <TestWrapper>
+          <Layout>
+            <div>Test Content</div>
+          </Layout>
+        </TestWrapper>
+      );
+
+      expect(screen.getByText('Test Content')).toBeInTheDocument();
+    });
+  });
+
+  describe('Utility Functions', () => {
+    test('formatPrice formats currency correctly', () => {
+      const { formatPrice } = require('../utils');
+
+      expect(formatPrice(25.50)).toBe('€25.50');
+      expect(formatPrice(100)).toBe('€100.00');
+    });
+
+    test('validateContactForm validates required fields', () => {
+      const { validateContactForm } = require('../utils');
+
+      const invalidData = {
+        name: '',
+        email: '',
+        message: '',
+        phoneNumber: ''
+      };
+
+      const errors = validateContactForm(invalidData);
+      expect(errors.length).toBeGreaterThan(0);
+      expect(errors).toContain('Please enter your name');
+    });
+
+    test('isValidEmail validates email format', () => {
+      const { isValidEmail } = require('../utils');
+
+      expect(isValidEmail('test@example.com')).toBe(true);
+      expect(isValidEmail('invalid-email')).toBe(false);
+      expect(isValidEmail('')).toBe(false);
+    });
+
+    test('sanitizeString removes HTML tags', () => {
+      const { sanitizeString } = require('../utils');
+
+      expect(sanitizeString('<script>alert("test")</script>Clean text'))
+        .toBe('Clean text');
+      expect(sanitizeString('<div>Content</div>'))
+        .toBe('Content');
     });
   });
 });

@@ -296,7 +296,7 @@ function writeTestReport(summary) {
  * @returns {string} HTML report string
  */
 function generateHTMLReport(summary) {
-  const { execution, performance, coverage, slowTests, failedTests } = summary;
+  const { execution, performance, slowTests, failedTests } = summary;
   
   return `
     <!DOCTYPE html>

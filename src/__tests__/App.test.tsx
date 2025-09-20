@@ -36,9 +36,9 @@ jest.mock('../components/features/AboutPage', () => {
   };
 });
 
-jest.mock('../components/features/BookingPage', () => {
-  return function MockBookingPage() {
-    return <div data-testid="booking-page">Booking Page</div>;
+jest.mock('../components/features/ServicesPage', () => {
+  return function MockServicesPage() {
+    return <div data-testid="services-page">Services Page</div>;
   };
 });
 
@@ -88,14 +88,14 @@ describe('App Component', () => {
     expect(screen.queryByTestId('home-page')).not.toBeInTheDocument();
   });
 
-  test('renders booking page when active tab is booking', () => {
+  test('renders services page when active tab is services', () => {
     mockUseApp.mockReturnValue({
-      state: { activeTab: 'booking' }
+      state: { activeTab: 'services' }
     });
-    
+
     render(<App />);
-    
-    expect(screen.getByTestId('booking-page')).toBeInTheDocument();
+
+    expect(screen.getByTestId('services-page')).toBeInTheDocument();
     expect(screen.queryByTestId('home-page')).not.toBeInTheDocument();
   });
 

@@ -27,6 +27,13 @@ jest.mock('../../../hooks/useSEO', () => ({
   BUSINESS_STRUCTURED_DATA: {}
 }));
 
+// Mock useModalDialog hook to avoid HTMLDialogElement issues
+jest.mock('../../../hooks/useModalDialog', () => ({
+  useModalDialog: () => ({
+    dialogRef: { current: null }
+  })
+}));
+
 const TestWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <AppProvider>
     {children}

@@ -5,6 +5,7 @@ export { default as Card } from './Card';
 export { default as ErrorBoundary } from './ErrorBoundary';
 export { default as Modal } from './Modal';
 export { default as BookingModal } from './BookingModal';
+export { default as BaseModal } from './BaseModal';
 export {
   default as Skeleton,
   LoadingSpinner,

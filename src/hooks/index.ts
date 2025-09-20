@@ -6,6 +6,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useApp } from '../contexts/AppContext';
 
+// Re-export dialog hook
+export { useModalDialog } from './useModalDialog';
+
 /**
  * Hook for managing mobile menu
  */

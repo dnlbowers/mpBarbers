@@ -114,9 +114,9 @@ const Button: React.FC<ButtonProps> = ({
    * @description Ensures all class arrays exist before spreading to prevent runtime errors
    */
   const getClasses = () => {
-    const safeVariantClasses = variantClasses[variant as keyof typeof variantClasses] || variantClasses.primary;
-    const safeSizeClasses = sizeClasses[size as keyof typeof sizeClasses] || sizeClasses.md;
-    
+    const safeVariantClasses = variantClasses[variant] || variantClasses.primary;
+    const safeSizeClasses = sizeClasses[size] || sizeClasses.md;
+
     return cn(
       ...baseClasses,
       ...safeVariantClasses,
@@ -156,6 +156,7 @@ const Button: React.FC<ButtonProps> = ({
           fill="none"
           viewBox="0 0 24 24"
           aria-hidden="true"
+          data-testid="loading-spinner"
         >
           <circle
             className="opacity-25"

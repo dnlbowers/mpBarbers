@@ -68,12 +68,12 @@ export const useAnalytics = () => {
     if (process.env.NODE_ENV === 'development' && !ENABLE_PERFORMANCE_MONITORING) {
       return;
     }
-
-    // In production, send to your analytics service
-    try {
+      // TODO: In production, pick one and send to your analytics service
       // gtag('event', event, properties);
       // mixpanel.track(event, properties);
-      // amplitude.logEvent(event, properties);
+      // amplitude.logEvent(event, properties);   
+    try {
+      
       console.log(`[Analytics] ${event}`, properties);
     } catch (error) {
       console.error('Analytics tracking failed:', error);

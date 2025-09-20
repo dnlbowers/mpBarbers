@@ -220,13 +220,13 @@ describe('Comprehensive Component Coverage', () => {
       expect(isValidEmail('')).toBe(false);
     });
 
-    test('sanitizeString removes HTML tags', () => {
+    test('sanitizeString escapes HTML characters', () => {
       const { sanitizeString } = require('../utils');
 
       expect(sanitizeString('<script>alert("test")</script>Clean text'))
         .toBe('Clean text');
       expect(sanitizeString('<div>Content</div>'))
-        .toBe('Content');
+        .toBe('&lt;div&gt;Content&lt;&#47;div&gt;');
     });
   });
 });

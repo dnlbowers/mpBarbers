@@ -202,10 +202,10 @@ describe('Utility Functions', () => {
      * Tests string sanitization for security
      * @description Ensures XSS prevention through input sanitization
      */
-    test('removes dangerous HTML characters', () => {
+    test('escapes dangerous HTML characters', () => {
       expect(sanitizeString('<script>alert("xss")</script>Hello')).toBe('Hello');
-      expect(sanitizeString('Hello<>World')).toBe('HelloWorld');
-      expect(sanitizeString('<div>Content</div>')).toBe('Content');
+      expect(sanitizeString('Hello<>World')).toBe('Hello&lt;&gt;World');
+      expect(sanitizeString('<div>Content</div>')).toBe('&lt;div&gt;Content&lt;&#47;div&gt;');
     });
 
     test('trims whitespace', () => {

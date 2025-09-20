@@ -1,11 +1,7 @@
 /**
  * Modern Test Utilities for React 18 + TypeScript
- * 
- * @author Luciano Greiner dos Santos & Istvan Jozsa approach
- * 
- * WHY: React 18 uses renderHook built into @testing-library/react (no deprecated libraries)
- * WHAT: Clean, immutable testing patterns with one-way data flow
- * HOW: Modern React 18 compatible utilities with efficient, scalable patterns
+ *
+ * Clean, immutable testing patterns with modern React 18 compatible utilities.
  */
 
 import React from 'react';
@@ -14,11 +10,7 @@ import { AppProvider } from '../contexts/AppContext';
 import { runAxeTest } from './setupTests';
 import type { BookingFormData, ContactFormData, Service } from '../types';
 
-// CLEAN ARCHITECTURE: Separate concerns for different test scenarios
 interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
-  /**
-   * IMMUTABLE STATE: Initial context state (never mutated)
-   */
   initialState?: {
     services?: Service[];
     bookings?: BookingFormData[];
@@ -26,18 +18,16 @@ interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
     loading?: boolean;
     error?: string | null;
   };
-  /**
-   * ONE-WAY DATA FLOW: Context providers for dependency injection
-   */
   providers?: React.ComponentType<{ children: React.ReactNode }>[];
 }
 
 /**
- * EFFICIENT RENDERING: Modern React 18 compatible render with context
- * 
- * WHY: Provides consistent testing environment with app context
- * WHAT: Wraps components with providers and returns testing utilities
- * HOW: Uses composition pattern for clean, scalable test setup
+ * Modern React 18 compatible render with context that provides consistent
+ * testing environment with app context and provider composition.
+ *
+ * @param ui - React element to render
+ * @param options - Render options including initial state and providers
+ * @returns Render result with testing utilities
  */
 export const renderWithProviders = (
   ui: React.ReactElement,
@@ -45,14 +35,12 @@ export const renderWithProviders = (
 ): RenderResult => {
   const { initialState, providers = [], ...renderOptions } = options;
 
-  // IMMUTABLE PATTERN: Create wrapper without mutating original
   const AllProviders: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    // ONE-WAY DATA FLOW: Providers compose in predictable order
     const wrappedChildren = providers.reduce(
       (acc, Provider) => <Provider>{acc}</Provider>,
       <AppProvider initialState={initialState}>{children}</AppProvider>
     );
-    
+
     return <>{wrappedChildren}</>;
   };
 
@@ -60,30 +48,30 @@ export const renderWithProviders = (
 };
 
 /**
- * ACCESSIBILITY-FIRST: Render with automatic a11y testing
- * 
- * WHY: Ensures components meet accessibility standards
- * WHAT: Combines rendering with axe-core accessibility testing
- * HOW: Runs axe after render, provides clean error reporting
+ * Renders component with automatic accessibility testing using axe-core.
+ * Combines rendering with accessibility validation for comprehensive testing.
+ *
+ * @param ui - React element to render
+ * @param options - Render options including initial state and providers
+ * @returns Promise resolving to render result after accessibility validation
  */
 export const renderWithA11yTesting = async (
   ui: React.ReactElement,
   options: CustomRenderOptions = {}
 ): Promise<RenderResult> => {
   const result = renderWithProviders(ui, options);
-  
-  // CLEAN TESTING: Non-blocking accessibility validation
+
   await runAxeTest(result.container);
-  
+
   return result;
 };
 
 /**
- * MODERN HOOK TESTING: React 18+ compatible hook testing
- * 
- * WHY: renderHook is now built into @testing-library/react
- * WHAT: Provides clean hook testing with context support
- * HOW: Uses modern renderHook API with wrapper composition
+ * React 18+ compatible hook testing with context support using modern renderHook API.
+ *
+ * @param hook - Hook function to test
+ * @param options - Hook options including initial state and providers
+ * @returns Hook render result with testing utilities
  */
 export const renderHookWithContext = <TProps, TResult>(
   hook: (props: TProps) => TResult,
@@ -91,24 +79,20 @@ export const renderHookWithContext = <TProps, TResult>(
 ) => {
   const { initialState, providers = [], ...hookOptions } = options;
 
-  // IMMUTABLE WRAPPER: Same pattern as component testing  
   const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const wrappedChildren = providers.reduce(
       (acc, Provider) => <Provider>{acc}</Provider>,
       <AppProvider initialState={initialState}>{children}</AppProvider>
     );
-    
+
     return <>{wrappedChildren}</>;
   };
 
   return renderHook(hook, { wrapper, ...hookOptions });
 };
 /**
- * EFFICIENT TEST DATA: Immutable test data factories
- * 
- * WHY: Prevents test pollution and ensures predictable state
- * WHAT: Factory functions that return fresh data objects
- * HOW: Uses object spread for immutable data creation
+ * Immutable test data factories that prevent test pollution and ensure predictable state.
+ * Factory functions return fresh data objects using object spread for immutability.
  */
 export const createTestService = (overrides: Partial<Service> = {}): Service => ({
   id: 'test-service-id',
@@ -142,11 +126,8 @@ export const createTestContact = (overrides: Partial<ContactFormData> = {}): Con
 });
 
 /**
- * LEGACY COMPATIBILITY: mockDataFactory object for existing tests
- * 
- * WHY: Maintains compatibility with existing test files
- * WHAT: Provides the mockDataFactory object that tests expect
- * HOW: Maps to the new factory functions above
+ * Legacy compatibility object for existing tests that provides
+ * the mockDataFactory interface expected by test files.
  */
 export const mockDataFactory = {
   bookingFormData: createTestBooking,
@@ -155,11 +136,8 @@ export const mockDataFactory = {
 };
 
 /**
- * CLEAN MOCK FACTORIES: Predictable mock functions
- * 
- * WHY: Consistent API responses across tests
- * WHAT: Pre-configured mock functions for different scenarios
- * HOW: Factory pattern with immutable configurations
+ * Predictable mock functions with consistent API responses across tests.
+ * Pre-configured mock functions for different testing scenarios.
  */
 export const createApiMocks = {
   success: <T>(data: T) => jest.fn().mockResolvedValue({ success: true, data }),
@@ -169,11 +147,8 @@ export const createApiMocks = {
 };
 
 /**
- * PERFORMANCE TESTING: Utilities for performance validation
- * 
- * WHY: Ensures components perform well under test conditions
- * WHAT: Timing and memory usage validation utilities
- * HOW: Provides clean API for performance assertions
+ * Performance testing utilities for timing and validation.
+ * Ensures components perform well under test conditions.
  */
 export const measureRenderTime = async (
   renderFn: () => Promise<RenderResult> | RenderResult
@@ -188,12 +163,10 @@ export const measureRenderTime = async (
   };
 };
 
-// DEFAULT EXPORT: Main testing utilities
 export { render, screen, fireEvent, waitFor, within } from '@testing-library/react';
 export { renderHook } from '@testing-library/react';
 export { userEvent } from '@testing-library/user-event';
 
-// BASIC TEST: Ensures test utils file works correctly
 describe('Test Utils', () => {
   test('test utilities load correctly', () => {
     expect(createTestService).toBeDefined();

@@ -42,7 +42,6 @@ export const useModalDialog = ({
     };
   }, [isOpen]);
 
-  // Event handling for ESC key and click outside
   useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) return;

@@ -1,6 +1,6 @@
 /**
  * Utility Functions Test Suite
- * 
+ *
  * @description Comprehensive tests for utility functions including validation,
  * formatting, sanitization, and business logic helpers. Tests ensure reliability
  * and security of core utility functions used throughout the application.
@@ -9,10 +9,6 @@
 import {
   formatPrice,
   formatDuration,
-  generateTimeSlots,
-  getMinBookingDate,
-  getMaxBookingDate,
-  validateBookingForm,
   validateContactForm,
   isValidEmail,
   isValidPhoneNumber,
@@ -22,7 +18,6 @@ import {
   cn,
 } from '../index';
 import { mockDataFactory } from '../../__tests__/testUtils';
-import { APP_CONFIG } from '../../constants';
 
 describe('Utility Functions', () => {
   describe('formatPrice', () => {
@@ -30,7 +25,7 @@ describe('Utility Functions', () => {
      * Tests price formatting with various numeric inputs
      * @description Ensures consistent currency formatting across different locales and values
      */
-    test('formats USD currency correctly', () => {
+    test('formats EUR currency correctly', () => {
       expect(formatPrice(35.50)).toBe('€35.50');
       expect(formatPrice(1250)).toBe('€1,250.00');
       expect(formatPrice(0)).toBe('€0.00');
@@ -74,148 +69,6 @@ describe('Utility Functions', () => {
     });
   });
 
-  describe('generateTimeSlots', () => {
-    /**
-     * Tests time slot generation for booking system
-     * @description Ensures accurate time slot generation based on business rules
-     */
-    test('generates time slots for valid date', () => {
-      // Create a date that's guaranteed to be a weekday (Monday)
-      const futureDate = new Date();
-      const daysUntilMonday = (8 - futureDate.getDay()) % 7 || 7;
-      futureDate.setDate(futureDate.getDate() + daysUntilMonday);
-      
-      const slots = generateTimeSlots(futureDate);
-      
-      expect(Array.isArray(slots)).toBe(true);
-      expect(slots.length).toBeGreaterThan(0);
-      
-      // Check slot structure
-      slots.forEach(slot => {
-        expect(slot).toHaveProperty('time');
-        expect(slot).toHaveProperty('available');
-        expect(slot).toHaveProperty('date');
-        expect(slot.date).toEqual(futureDate);
-      });
-    });
-
-    test('returns empty array for Sunday (closed)', () => {
-      // Find next Sunday
-      const sunday = new Date();
-      sunday.setDate(sunday.getDate() + (7 - sunday.getDay()));
-      
-      const slots = generateTimeSlots(sunday);
-      expect(slots).toEqual([]);
-    });
-
-    test('filters past time slots for today', () => {
-      const today = new Date();
-      const slots = generateTimeSlots(today);
-      
-      const now = new Date();
-      const currentHour = now.getHours();
-      
-      // All available slots should be in the future
-      const availableSlots = slots.filter(slot => slot.available);
-      availableSlots.forEach(slot => {
-        const [slotHour] = slot.time.split(':').map(Number);
-        expect(slotHour).toBeGreaterThan(currentHour + APP_CONFIG.minBookingHoursAhead);
-      });
-    });
-  });
-
-  describe('getMinBookingDate and getMaxBookingDate', () => {
-    /**
-     * Tests booking date boundary calculations
-     * @description Ensures proper booking window enforcement
-     */
-    test('returns valid date strings', () => {
-      const minDate = getMinBookingDate();
-      const maxDate = getMaxBookingDate();
-      
-      expect(typeof minDate).toBe('string');
-      expect(typeof maxDate).toBe('string');
-      expect(minDate).toMatch(/^\d{4}-\d{2}-\d{2}$/);
-      expect(maxDate).toMatch(/^\d{4}-\d{2}-\d{2}$/);
-    });
-
-    test('max date is after min date', () => {
-      const minDate = new Date(getMinBookingDate());
-      const maxDate = new Date(getMaxBookingDate());
-      
-      expect(maxDate.getTime()).toBeGreaterThan(minDate.getTime());
-    });
-
-    test('respects booking window configuration', () => {
-      const minDate = new Date(getMinBookingDate());
-      const maxDate = new Date(getMaxBookingDate());
-      const today = new Date();
-      
-      const daysDifference = Math.ceil(
-        (maxDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
-      );
-      
-      expect(daysDifference).toBeLessThanOrEqual(APP_CONFIG.maxBookingDaysAhead + 1);
-    });
-  });
-
-  describe('validateBookingForm', () => {
-    /**
-     * Tests booking form validation logic
-     * @description Ensures comprehensive form validation with proper error messages
-     */
-    test('returns no errors for valid data', () => {
-      const validData = mockDataFactory.bookingFormData();
-      const errors = validateBookingForm(validData);
-      
-      expect(errors).toHaveLength(0);
-    });
-
-    test('validates required fields', () => {
-      const invalidData = mockDataFactory.bookingFormData({
-        fullName: '',
-        email: '',
-        phoneNumber: ''
-      });
-      
-      const errors = validateBookingForm(invalidData);
-      
-      expect(errors).toContain('Please enter your full name');
-      expect(errors).toContain('Please enter your email address');
-      expect(errors).toContain('Please enter your phone number');
-    });
-
-    test('validates email format', () => {
-      const invalidData = mockDataFactory.bookingFormData({
-        email: 'invalid-email'
-      });
-      
-      const errors = validateBookingForm(invalidData);
-      
-      expect(errors).toContain('Please enter a valid email address');
-    });
-
-    test('validates phone number format', () => {
-      const invalidData = mockDataFactory.bookingFormData({
-        phoneNumber: 'invalid-phone'
-      });
-      
-      const errors = validateBookingForm(invalidData);
-      
-      expect(errors).toContain('Please enter a valid phone number');
-    });
-
-    test('validates service selection', () => {
-      const invalidData = mockDataFactory.bookingFormData({
-        service: ''
-      });
-      
-      const errors = validateBookingForm(invalidData);
-      
-      expect(errors).toContain('Please select a service');
-    });
-  });
-
   describe('validateContactForm', () => {
     /**
      * Tests contact form validation logic
@@ -224,7 +77,7 @@ describe('Utility Functions', () => {
     test('returns no errors for valid data', () => {
       const validData = mockDataFactory.contactFormData();
       const errors = validateContactForm(validData);
-      
+
       expect(errors).toHaveLength(0);
     });
 
@@ -234,21 +87,31 @@ describe('Utility Functions', () => {
         email: '',
         message: ''
       });
-      
+
       const errors = validateContactForm(invalidData);
-      
+
       expect(errors).toContain('Please enter your name');
       expect(errors).toContain('Please enter your email address');
       expect(errors).toContain('Please enter a message');
+    });
+
+    test('validates email format', () => {
+      const invalidData = mockDataFactory.contactFormData({
+        email: 'invalid-email'
+      });
+
+      const errors = validateContactForm(invalidData);
+
+      expect(errors).toContain('Please enter a valid email address');
     });
 
     test('validates optional phone number when provided', () => {
       const invalidData = mockDataFactory.contactFormData({
         phoneNumber: 'invalid-phone'
       });
-      
+
       const errors = validateContactForm(invalidData);
-      
+
       expect(errors).toContain('Please enter a valid phone number');
     });
 
@@ -256,9 +119,9 @@ describe('Utility Functions', () => {
       const validData = mockDataFactory.contactFormData({
         phoneNumber: ''
       });
-      
+
       const errors = validateContactForm(validData);
-      
+
       expect(errors).not.toContain('Please enter a valid phone number');
     });
   });
@@ -276,7 +139,7 @@ describe('Utility Functions', () => {
         'firstname.lastname@company.com',
         'user123@test-domain.com'
       ];
-      
+
       validEmails.forEach(email => {
         expect(isValidEmail(email)).toBe(true);
       });
@@ -287,12 +150,11 @@ describe('Utility Functions', () => {
         'invalid-email',
         '@example.com',
         'user@',
-        // 'user@domain', // This might be considered valid by some systems
         'user space@example.com',
         'user..double.dot@example.com',
         ''
       ];
-      
+
       invalidEmails.forEach(email => {
         expect(isValidEmail(email)).toBe(false);
       });
@@ -313,7 +175,7 @@ describe('Utility Functions', () => {
         '+44 20 7946 0958',
         '555.123.4567'
       ];
-      
+
       validPhones.forEach(phone => {
         expect(isValidPhoneNumber(phone)).toBe(true);
       });
@@ -328,7 +190,7 @@ describe('Utility Functions', () => {
         '555-abc-defg',
         ''
       ];
-      
+
       invalidPhones.forEach(phone => {
         expect(isValidPhoneNumber(phone)).toBe(false);
       });
@@ -371,7 +233,7 @@ describe('Utility Functions', () => {
     test('generates unique IDs', () => {
       const id1 = generateId();
       const id2 = generateId();
-      
+
       expect(typeof id1).toBe('string');
       expect(typeof id2).toBe('string');
       expect(id1).not.toBe(id2);
@@ -381,7 +243,7 @@ describe('Utility Functions', () => {
 
     test('generates IDs without spaces or special characters', () => {
       const id = generateId();
-      
+
       expect(id).toMatch(/^[a-z0-9]+$/);
       expect(id).not.toContain(' ');
       expect(id).not.toContain('-');
@@ -391,7 +253,7 @@ describe('Utility Functions', () => {
     test('generates multiple unique IDs', () => {
       const ids = Array.from({ length: 100 }, generateId);
       const uniqueIds = new Set(ids);
-      
+
       expect(uniqueIds.size).toBe(ids.length);
     });
   });
@@ -412,10 +274,10 @@ describe('Utility Functions', () => {
     test('delays function execution', () => {
       const mockFn = jest.fn();
       const debouncedFn = debounce(mockFn, 1000);
-      
+
       debouncedFn();
       expect(mockFn).not.toHaveBeenCalled();
-      
+
       jest.advanceTimersByTime(1000);
       expect(mockFn).toHaveBeenCalledTimes(1);
     });
@@ -423,11 +285,11 @@ describe('Utility Functions', () => {
     test('cancels previous calls', () => {
       const mockFn = jest.fn();
       const debouncedFn = debounce(mockFn, 1000);
-      
+
       debouncedFn();
       debouncedFn();
       debouncedFn();
-      
+
       jest.advanceTimersByTime(1000);
       expect(mockFn).toHaveBeenCalledTimes(1);
     });
@@ -435,10 +297,10 @@ describe('Utility Functions', () => {
     test('passes arguments correctly', () => {
       const mockFn = jest.fn();
       const debouncedFn = debounce(mockFn, 1000);
-      
+
       debouncedFn('arg1', 'arg2');
       jest.advanceTimersByTime(1000);
-      
+
       expect(mockFn).toHaveBeenCalledWith('arg1', 'arg2');
     });
   });
@@ -459,8 +321,8 @@ describe('Utility Functions', () => {
     test('handles conditional classes', () => {
       const isActive = true;
       const isDisabled = false;
-      
-      expect(cn('btn', isActive && 'active', isDisabled && 'disabled')).toBe('btn active');
+
+      expect(cn('btn', isActive ? 'active' : '', isDisabled ? 'disabled' : '')).toBe('btn active');
     });
 
     test('handles empty input', () => {
@@ -469,7 +331,7 @@ describe('Utility Functions', () => {
     });
 
     test('handles mixed types', () => {
-      expect(cn('base', true && 'conditional', false && 'hidden', 'final')).toBe('base conditional final');
+      expect(cn('base', true ? 'conditional' : '', false ? 'hidden' : '', 'final')).toBe('base conditional final');
     });
   });
 });

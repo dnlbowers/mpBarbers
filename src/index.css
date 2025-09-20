@@ -38,7 +38,7 @@
     border: 0;
   }
 
-  .sr-only.focus:not-sr-only {
+  .sr-only:focus {
     position: static;
     width: auto;
     height: auto;

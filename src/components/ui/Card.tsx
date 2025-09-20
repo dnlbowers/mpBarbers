@@ -7,10 +7,10 @@ interface CardProps extends BaseComponentProps {
   readonly padding?: 'none' | 'sm' | 'md' | 'lg';
   readonly hover?: boolean;
   readonly onClick?: () => void;
-  readonly role?: string;
-  readonly tabIndex?: number;
+  readonly type?: 'button' | 'submit' | 'reset';
+  readonly 'aria-label'?: string;
   readonly 'aria-pressed'?: boolean;
-  readonly onKeyDown?: (event: React.KeyboardEvent) => void;
+  readonly disabled?: boolean;
 }
 
 /**
@@ -44,6 +44,8 @@ const Card: React.FC<CardProps> = ({
   padding = 'md',
   hover = false,
   onClick,
+  type = 'button',
+  disabled = false,
   className,
   ...props
 }) => {
@@ -103,10 +105,25 @@ const Card: React.FC<CardProps> = ({
     className
   );
 
+  // If interactive, render as button for proper accessibility
+  if (onClick) {
+    return (
+      <button
+        type={type}
+        className={classes}
+        onClick={onClick}
+        disabled={disabled}
+        {...props}
+      >
+        {children}
+      </button>
+    );
+  }
+
+  // If not interactive, render as div
   return (
-    <div 
-      className={classes} 
-      onClick={onClick}
+    <div
+      className={classes}
       {...props}
     >
       {children}

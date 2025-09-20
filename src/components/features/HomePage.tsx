@@ -3,30 +3,33 @@
  * Demonstrates the new modular architecture with TypeScript
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useApp } from '../../contexts/AppContext';
 import { SERVICES, TESTIMONIALS, APP_CONFIG } from '../../constants';
 import { formatPrice, formatDuration } from '../../utils';
 import { useSEO, useStructuredData, SEO_CONFIGS, BUSINESS_STRUCTURED_DATA } from '../../hooks/useSEO';
 import Button from '../ui/Button';
 import Card from '../ui/Card';
+import BookingModal from '../ui/BookingModal';
 import styles from './css/HomePage.module.css';
 import heroImage from '../../assets/images/home/mpbarber-wide-view.webp';
 
 const HomePage: React.FC = () => {
   const { setActiveTab } = useApp();
-  
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+
   // SEO optimization
   useSEO(SEO_CONFIGS.home);
   useStructuredData(BUSINESS_STRUCTURED_DATA);
 
   // Memoize handlers to prevent unnecessary re-renders
   const handleMainCTAClick = React.useCallback(() => {
-    window.open('https://www.fresha.com/a/mp-barbershop-birkirkara-triq-il-karmnu-birkirkara-atsvpl0i/booking?cartId=3584a3ab-5887-4986-a1f9-f6a960c7b8a5', '_blank');
+    setIsBookingModalOpen(true);
   }, []);
 
   const handleViewServicesClick = React.useCallback(() => {
     setActiveTab('services');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [setActiveTab]);
 
   return (
@@ -44,10 +47,10 @@ const HomePage: React.FC = () => {
           <p className="text-xl md:text-2xl text-gray-600 mb-8">
             {APP_CONFIG.tagline}
           </p>
-          <Button 
+          <Button
             size="lg"
             onClick={handleMainCTAClick}
-            aria-label="Book your appointment on Fresha (opens in new tab)"
+            aria-label="Book your appointment"
           >
             BOOK YOUR CUT
           </Button>
@@ -176,6 +179,11 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      <BookingModal
+        isOpen={isBookingModalOpen}
+        onClose={() => setIsBookingModalOpen(false)}
+      />
     </div>
   );
 };

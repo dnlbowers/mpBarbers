@@ -15,6 +15,7 @@ const Navigation: React.FC = () => {
 
   const handleNavigation = (tabKey: string) => {
     setActiveTab(tabKey as any);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleKeyDown = (event: React.KeyboardEvent, tabKey: string) => {

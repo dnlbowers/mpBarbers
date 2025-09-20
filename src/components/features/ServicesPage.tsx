@@ -8,9 +8,11 @@ import { SERVICES, SERVICE_CATEGORIES } from '../../constants';
 import { formatPrice, formatDuration } from '../../utils';
 import { useSEO } from '../../hooks/useSEO';
 import Button from '../ui/Button';
+import BookingModal from '../ui/BookingModal';
 
 const ServicesPage: React.FC = () => {
   const [showStickyButton, setShowStickyButton] = React.useState(false);
+  const [isBookingModalOpen, setIsBookingModalOpen] = React.useState(false);
 
   // SEO optimization
   useSEO({
@@ -48,7 +50,7 @@ const ServicesPage: React.FC = () => {
   }, []);
 
   const handleBookingClick = React.useCallback(() => {
-    window.open('https://www.fresha.com/a/mp-barbershop-birkirkara-triq-il-karmnu-birkirkara-atsvpl0i/booking?cartId=3584a3ab-5887-4986-a1f9-f6a960c7b8a5', '_blank');
+    setIsBookingModalOpen(true);
   }, []);
 
   // Group services by category (memoized for performance)
@@ -175,12 +177,17 @@ const ServicesPage: React.FC = () => {
         <Button 
           size="lg"
           onClick={handleBookingClick}
-          aria-label="Quick book appointment (opens in new tab)"
+          aria-label="Quick book appointment"
           className="px-6 py-3 text-sm font-semibold tracking-wide uppercase shadow-lg hover:shadow-xl bg-gray-900 text-white border-2 border-gray-900 hover:bg-white hover:text-gray-900 transition-colors duration-200"
         >
           📅 Book Now
         </Button>
       </div>
+
+      <BookingModal
+        isOpen={isBookingModalOpen}
+        onClose={() => setIsBookingModalOpen(false)}
+      />
     </div>
   );
 };

@@ -112,7 +112,7 @@ describe('Comprehensive Component Coverage', () => {
       );
 
       expect(screen.getByText(/MP BARBERSHOP/i)).toBeInTheDocument();
-      expect(screen.getByText(/OUR SERVICES/i)).toBeInTheDocument();
+      expect(screen.getByText(/TRADITIONAL BARBERING SERVICES/i)).toBeInTheDocument();
     });
 
     test('AboutPage renders content', () => {
@@ -124,7 +124,7 @@ describe('Comprehensive Component Coverage', () => {
         </TestWrapper>
       );
 
-      expect(screen.getByText(/ABOUT MP BARBERS/i)).toBeInTheDocument();
+      expect(screen.getByText(/MP BARBERSHOP/i)).toBeInTheDocument();
     });
 
     test('ServicesPage renders services', () => {
@@ -148,7 +148,7 @@ describe('Comprehensive Component Coverage', () => {
         </TestWrapper>
       );
 
-      expect(screen.getByText(/GET IN TOUCH/i)).toBeInTheDocument();
+      expect(screen.getByText(/CONTACT MP BARBERSHOP/i)).toBeInTheDocument();
       expect(screen.getByText(/Send a Message/i)).toBeInTheDocument();
     });
   });

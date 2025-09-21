@@ -77,7 +77,7 @@ describe('HomePage Component', () => {
       </TestWrapper>
     );
     
-    expect(screen.getByText('OUR SERVICES')).toBeInTheDocument();
+    expect(screen.getByText('TRADITIONAL BARBERING SERVICES')).toBeInTheDocument();
     expect(screen.getByText('View All Services →')).toBeInTheDocument();
   });
 

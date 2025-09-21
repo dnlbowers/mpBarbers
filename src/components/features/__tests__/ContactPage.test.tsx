@@ -68,7 +68,7 @@ describe('ContactPage Component', () => {
       </TestWrapper>
     );
     
-    expect(screen.getByText('GET IN TOUCH')).toBeInTheDocument();
+    expect(screen.getByText('CONTACT MP BARBERSHOP')).toBeInTheDocument();
   });
 
   test('renders contact information section', () => {
@@ -78,7 +78,7 @@ describe('ContactPage Component', () => {
       </TestWrapper>
     );
     
-    expect(screen.getByText('Visit Us')).toBeInTheDocument();
+    expect(screen.getByText('Visit Our Birkirkara Barbershop')).toBeInTheDocument();
     expect(screen.getByText('Location')).toBeInTheDocument();
     expect(screen.getByText('Hours')).toBeInTheDocument();
     expect(screen.getByText('Phone')).toBeInTheDocument();

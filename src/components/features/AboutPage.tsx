@@ -11,20 +11,32 @@ const AboutPage: React.FC = () => {
     <div className="pt-20">
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4">
-          <h1 className="text-5xl font-bold text-center mb-12">
-            ABOUT MP BARBERS
+          <h1 className="text-5xl font-bold text-center mb-8">
+            MP BARBERSHOP
           </h1>
-          
-          <div className="prose prose-lg mx-auto text-center mb-12">
-            <p className="text-gray-700 leading-relaxed mb-6">
-              Founded in 2020, MP Barbers has quickly become the premier destination for modern men's grooming. 
-              Our philosophy is simple: combine traditional barbering techniques with contemporary style to deliver 
-              exceptional results every time.
+
+          <h2 className="text-2xl font-light text-center mb-12 text-gray-700 italic">
+            Crafted with Legacy, Defined by Precision.
+          </h2>
+
+          <div className="prose prose-lg mx-auto mb-12">
+            <p className="text-gray-700 leading-relaxed mb-6 text-justify">
+              At MP Barbershop, the art of traditional barbering is not merely practiced; it is meticulously preserved and innovatively applied.
+              Founded by Mario Pulvirenti, a craftsman whose professional journey began by honing his skills at the esteemed Taspiru,
+              this establishment represents the culmination of a lifelong dedication to the profession. The name Taspiru is more than a past affiliation;
+              it is a foundational principle, a touchstone of the classic techniques and unwavering standards that define a master barber's work.
             </p>
-            
-            <p className="text-gray-700 leading-relaxed">
-              Our team of master barbers brings decades of combined experience, ensuring that every cut, 
-              trim, and shave meets the highest standards of precision and style.
+
+            <p className="text-gray-700 leading-relaxed mb-6 text-justify">
+              Here, every visit transcends the ordinary, evolving into a sophisticated grooming experience designed to highlight individual style and ensure absolute comfort.
+              Mario's skillful hands are guided by an innate understanding of form and a passion for detail, ensuring that each sharp haircut, precise skin fade,
+              and soothing hot towel shave is a bespoke service tailored to the client. The environment is one of quiet refinement,
+              a welcoming destination for self-care where one can indulge and emerge looking not just sharp, but truly polished and refined.
+            </p>
+
+            <p className="text-gray-700 leading-relaxed text-justify">
+              Located on Triq il-Karmnu in Birkirkara, MP Barbershop provides a true gentleman's experience,
+              blending the timeless heritage of a master craftsman with the tailored needs of contemporary life.
             </p>
           </div>
 

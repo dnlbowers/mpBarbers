@@ -60,7 +60,7 @@ const HomePage: React.FC = () => {
 
       {/* Services Section */}
       <section 
-        className="pt-20 bg-white"
+        className="py-20 bg-white"
         aria-label="Our services"
       >
         <div className="max-w-6xl mx-auto px-4">
@@ -109,7 +109,7 @@ const HomePage: React.FC = () => {
 
       {/* Testimonials Section */}
       <section 
-        className="pt-20 bg-gray-50"
+        className="py-20 bg-gray-50"
         aria-label="Customer testimonials"
       >
         <div className="max-w-4xl mx-auto px-4 text-center">

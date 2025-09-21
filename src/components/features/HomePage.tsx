@@ -37,7 +37,7 @@ const HomePage: React.FC = () => {
     <div>
       {/* Hero Section */}
       <section 
-        className={`relative h-screen flex items-center justify-center ${styles.heroSection}`}
+        className={`relative flex items-center justify-center ${styles.heroSection}`}
         style={{ '--hero-image': `url(${heroImage})` } as React.CSSProperties}
         aria-label="Hero section"
       >
@@ -60,7 +60,7 @@ const HomePage: React.FC = () => {
 
       {/* Services Section */}
       <section 
-        className="py-20 bg-white"
+        className="pt-20 bg-white"
         aria-label="Our services"
       >
         <div className="max-w-6xl mx-auto px-4">
@@ -109,7 +109,7 @@ const HomePage: React.FC = () => {
 
       {/* Testimonials Section */}
       <section 
-        className="py-20 bg-gray-50"
+        className="pt-20 bg-gray-50"
         aria-label="Customer testimonials"
       >
         <div className="max-w-4xl mx-auto px-4 text-center">
@@ -144,8 +144,8 @@ const HomePage: React.FC = () => {
           </div>
 
           {/* Review Links */}
-          <div className="mt-12 text-center">
-            <p className="text-gray-600 mb-6">Love our service? Share your experience!</p>
+          <div className="mt-14 text-center">
+            <p className="text-gray-600 mb-8">Love our service? Share your experience!</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 variant="outline"

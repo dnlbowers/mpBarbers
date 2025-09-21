@@ -1,6 +1,6 @@
 /* src/components/features/HomePage.module.css */
 .heroSection {
-  position: relative;
+  height: 75vh;
 }
 
 .heroSection::before {

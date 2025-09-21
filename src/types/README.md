@@ -5,6 +5,7 @@
 This directory contains the comprehensive TypeScript type definitions that form the foundation of the application's type safety system. Following **Clean Architecture** principles, these types represent domain entities, value objects, and interface contracts throughout the application.
 
 ### Type Design Principles
+
 - **Domain-Driven Design**: Types reflect business domain concepts
 - **Immutability**: All interfaces use readonly properties
 - **Type Safety**: Comprehensive type coverage preventing runtime errors
@@ -16,6 +17,7 @@ This directory contains the comprehensive TypeScript type definitions that form 
 ### Domain Types
 
 #### Business Entities
+
 Core business objects representing real-world concepts:
 
 ```typescript
@@ -38,6 +40,7 @@ interface BookingDetails {
 ```
 
 #### Value Objects
+
 Immutable objects representing business values:
 
 ```typescript
@@ -58,6 +61,7 @@ interface ContactInfo {
 ### Component Types
 
 #### Props Interfaces
+
 Type-safe component prop definitions:
 
 ```typescript
@@ -80,6 +84,7 @@ interface ButtonProps extends BaseComponentProps {
 ### API Types
 
 #### Request/Response Patterns
+
 Consistent API communication types:
 
 ```typescript
@@ -99,6 +104,7 @@ interface AppError {
 ### Form Types
 
 #### Form Data Interfaces
+
 Type-safe form handling:
 
 ```typescript
@@ -123,6 +129,7 @@ interface ContactFormData {
 ## 🏗️ Type Architecture Patterns
 
 ### Union Types for Business Logic
+
 ```typescript
 // Service categories with business meaning
 type ServiceCategory = 'haircut' | 'beard' | 'styling' | 'kids';
@@ -135,6 +142,7 @@ type BookingStep = 'service' | 'datetime' | 'details' | 'confirmation';
 ```
 
 ### Generic Types for Reusability
+
 ```typescript
 // Generic API response for any data type
 interface ApiResponse<T> {
@@ -153,6 +161,7 @@ interface FormState<T> {
 ```
 
 ### Mapped Types for Flexibility
+
 ```typescript
 // Make all properties optional for partial updates
 type PartialUpdate<T> = Partial<T>;
@@ -171,6 +180,7 @@ type ValidationRules<T> = {
 ## 🔒 Type Safety Patterns
 
 ### Readonly Interfaces
+
 All interfaces use readonly properties to prevent mutations:
 
 ```typescript
@@ -190,6 +200,7 @@ interface Service {
 ```
 
 ### Discriminated Unions
+
 Type-safe state management with discriminated unions:
 
 ```typescript
@@ -214,6 +225,7 @@ const handleState = (state: LoadingState) => {
 ```
 
 ### Branded Types
+
 Prevent primitive obsession with branded types:
 
 ```typescript
@@ -237,6 +249,7 @@ const processBooking = (bookingId: BookingId, customerId: CustomerId) => {
 ## 🎯 Type Composition Patterns
 
 ### Interface Extension
+
 ```typescript
 // Base component props
 interface BaseComponentProps {
@@ -257,6 +270,7 @@ interface InputProps extends BaseComponentProps {
 ```
 
 ### Type Intersection
+
 ```typescript
 // Combine multiple type concerns
 type InteractiveElement = {
@@ -277,6 +291,7 @@ type ButtonProps = BaseComponentProps & InteractiveElement & AccessibleElement &
 ```
 
 ### Conditional Types
+
 ```typescript
 // Conditional type based on component variant
 type ButtonProps<V extends ButtonVariant> = {
@@ -297,6 +312,7 @@ const LoadingButton = (props: ButtonProps<'loading'>) => {
 ## 🧪 Type Testing
 
 ### Type-Level Testing
+
 ```typescript
 // Utility types for testing type correctness
 type Expect<T extends true> = T;
@@ -312,6 +328,7 @@ type TestCases = [
 ```
 
 ### Runtime Type Validation
+
 ```typescript
 // Runtime type guards for API responses
 const isService = (obj: unknown): obj is Service => {
@@ -339,6 +356,7 @@ const processApiResponse = (response: unknown) => {
 ## 📊 Type Documentation Best Practices
 
 ### JSDoc Integration
+
 ```typescript
 /**
  * Represents a barbershop service offering
@@ -360,6 +378,7 @@ interface Service {
 ```
 
 ### Example Usage Documentation
+
 ```typescript
 /**
  * @example
@@ -378,7 +397,8 @@ interface Service {
 ## 🔗 Type Dependencies
 
 ### Internal Type Relationships
-```
+
+``` markdown
 Domain Types
 ├── Service → ServiceCategory
 ├── Booking → BookingDetails → CustomerInfo
@@ -398,6 +418,7 @@ API Types
 ```
 
 ### External Dependencies
+
 - **React**: React.ReactNode, React.ComponentProps
 - **DOM**: Event types, HTML attributes
 - **JavaScript**: Built-in types (Date, string, number)
@@ -405,6 +426,7 @@ API Types
 ## 🎯 Migration and Evolution
 
 ### Type Evolution Strategy
+
 ```typescript
 // Version 1: Initial type
 interface ServiceV1 {
@@ -433,6 +455,7 @@ interface ServiceV3 {
 ```
 
 ### Deprecation Patterns
+
 ```typescript
 /**
  * @deprecated Use ServiceV3 instead. Will be removed in v2.0.0

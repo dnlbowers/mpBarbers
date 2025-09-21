@@ -78,8 +78,8 @@ const Button: React.FC<ButtonProps> = ({
     ],
     outline: [
       'border-2',
-      'border-gray-900',
-      'text-gray-900',
+      'border-gray-300',
+      'text-gray-700',
       'bg-transparent',
       'hover:bg-gray-900',
       'hover:text-white',

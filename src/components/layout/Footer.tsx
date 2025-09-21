@@ -18,9 +18,13 @@ const Footer: React.FC = () => {
         <div className="grid md:grid-cols-3 gap-8 mb-6">
           {/* Brand */}
           <div>
-            <h3 className="text-xl font-bold mb-2">MP BARBERS</h3>
-            <p className="text-gray-300">
+            <h3 className="text-xl font-bold mb-2">MP BARBERSHOP</h3>
+            <p className="text-gray-300 text-sm">
               {APP_CONFIG.tagline}
+            </p>
+            <p className="text-gray-400 text-xs mt-2">
+              Founded by Mario Pulvirenti<br />
+              Crafted with Legacy, and Defined by Precision Since 2025
             </p>
           </div>
 
@@ -84,7 +88,7 @@ const Footer: React.FC = () => {
         {/* Copyright */}
         <div className="border-t border-gray-700 pt-6 text-center">
           <p className="text-gray-300">
-            &copy; {currentYear} MP Barbers. All rights reserved.
+            &copy; {currentYear} MP Barbershop Birkirkara. All rights reserved. | Master Barber Mario Pulvirenti
           </p>
         </div>
       </div>

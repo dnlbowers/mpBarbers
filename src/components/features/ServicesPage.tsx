@@ -16,9 +16,9 @@ const ServicesPage: React.FC = () => {
 
   // SEO optimization
   useSEO({
-    title: 'Services & Pricing - MP Barbershop',
-    description: 'Professional barbershop services including haircuts, beard grooming, and styling. View our complete service menu with pricing.',
-    keywords: ['barbershop services', 'haircuts', 'beard grooming', 'pricing', 'Malta barber'],
+    title: 'Services & Pricing | MP Barbershop Birkirkara | Mario Pulvirenti',
+    description: 'Traditional barbering services at MP Barbershop Birkirkara. Master barber Mario Pulvirenti offers haircuts €12, skin fades €12, beard grooming €6. Expert craftsmanship, quick service 15-30 mins.',
+    keywords: ['barbershop services Birkirkara', 'Mario Pulvirenti barber', 'haircuts Malta €12', 'skin fade', 'beard grooming', 'master barber Malta', 'traditional barber Malta', 'MP Barbershop pricing'],
   });
 
   // Sticky button scroll logic with throttling
@@ -77,8 +77,8 @@ const ServicesPage: React.FC = () => {
           </h1>
           <div className="w-24 h-0.5 bg-gray-900 mx-auto mb-6"></div>
           <p className="text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed mb-8">
-            Professional barbershop services with experienced barbers.<br/>
-            Traditional craftsmanship meets modern precision.
+            Experience traditional barbering excellence with master barber Mario Pulvirenti.<br/>
+            Premium grooming services at accessible prices - haircuts from €12, quick 30-minute service.
           </p>
           
           {/* Top Booking CTA */}
@@ -150,8 +150,8 @@ const ServicesPage: React.FC = () => {
             </h2>
             <div className="w-16 h-0.5 bg-gray-900 mx-auto mb-6"></div>
             <p className="text-gray-700 mb-6 leading-relaxed">
-              Schedule your visit with our experienced barbers.<br/>
-              Professional service, traditional techniques.
+              Schedule your visit with master barber Mario Pulvirenti at MP Barbershop Birkirkara.<br/>
+              Traditional barbering techniques, meticulous precision, gentleman's experience.
             </p>
             <Button 
               size="lg"

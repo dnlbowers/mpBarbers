@@ -22,9 +22,9 @@ const AboutPage: React.FC = () => {
           <div className="prose prose-lg mx-auto mb-12">
             <p className="text-gray-700 leading-relaxed mb-6 text-justify">
               At MP Barbershop, the art of traditional barbering is not merely practiced; it is meticulously preserved and innovatively applied.
-              Founded by Mario Pulvirenti, a craftsman whose professional journey began by honing his skills at the esteemed Taspiru,
-              this establishment represents the culmination of a lifelong dedication to the profession. The name Taspiru is more than a past affiliation;
-              it is a foundational principle, a touchstone of the classic techniques and unwavering standards that define a master barber's work.
+              Founded by Mario Pulvirenti, a craftsman whose professional journey began by honing his skills at one of Malta's leading barbershop chains,
+              this establishment represents the culmination of a lifelong dedication to the profession. His experience at prestigious establishments
+              serves as a foundational principle, a touchstone of the classic techniques and unwavering standards that define a master barber's work.
             </p>
 
             <p className="text-gray-700 leading-relaxed mb-6 text-justify">

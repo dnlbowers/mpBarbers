@@ -63,9 +63,12 @@ const HomePage: React.FC = () => {
         aria-label="Our services"
       >
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12">
-            OUR SERVICES
+          <h2 className="text-4xl font-bold text-center mb-4">
+            TRADITIONAL BARBERING SERVICES
           </h2>
+          <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+            Experience the finest traditional craftsmanship with every cut, skin fade, and hot towel shave at our Birkirkara barbershop
+          </p>
           <div className="grid md:grid-cols-3 gap-8">
             {SERVICES.slice(0, 3).map((service) => (
               <button
@@ -182,13 +185,13 @@ const HomePage: React.FC = () => {
               <div className="text-4xl font-bold text-gray-900 mb-2" aria-label="500 plus happy clients">
                 500+
               </div>
-              <p className="text-gray-600">Happy Clients</p>
+              <p className="text-gray-600">Happy Clients in Malta</p>
             </div>
             <div>
-              <div className="text-4xl font-bold text-gray-900 mb-2" aria-label="4 expert barbers">
-                4
+              <div className="text-4xl font-bold text-gray-900 mb-2" aria-label="Master barber with traditional barbering excellence">
+                1
               </div>
-              <p className="text-gray-600">Expert Barbers</p>
+              <p className="text-gray-600">Master Barber</p>
             </div>
             <div>
               <div className="text-4xl font-bold text-gray-900 mb-2" aria-label="5 star average rating">

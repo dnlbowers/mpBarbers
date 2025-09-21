@@ -134,13 +134,17 @@ const ContactPage: React.FC = () => {
     <div className="pt-20">
       <section className="py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4">
-          <h1 className="text-5xl font-bold text-center mb-12">
-            GET IN TOUCH
+          <h1 className="text-5xl font-bold text-center mb-4">
+            CONTACT MP BARBERSHOP
           </h1>
+          <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+            Visit Mario Pulvirenti's barbershop on Triq il-Karmnu, Birkirkara, Malta.
+            Experience traditional barbering excellence in a refined gentleman's environment.
+          </p>
           
           <div className="grid md:grid-cols-2 gap-12">
             <div>
-              <h2 className="text-3xl font-semibold mb-8">Visit Us</h2>
+              <h2 className="text-3xl font-semibold mb-8">Visit Our Birkirkara Barbershop</h2>
               
               <div className="space-y-6">
                 <div className="flex items-start">

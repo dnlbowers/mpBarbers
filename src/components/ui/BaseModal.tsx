@@ -47,7 +47,13 @@ const BaseModal: React.FC<BaseModalProps> = ({
     '2xl': 'max-w-2xl'
   };
 
-  const backdropClass = `backdrop:bg-black backdrop:bg-opacity-${backdropOpacity}`;
+  const backdropClasses = {
+    25: 'backdrop:bg-black backdrop:bg-opacity-25',
+    50: 'backdrop:bg-black backdrop:bg-opacity-50',
+    75: 'backdrop:bg-black backdrop:bg-opacity-75'
+  };
+
+  const backdropClass = backdropClasses[backdropOpacity];
 
   return (
     <dialog

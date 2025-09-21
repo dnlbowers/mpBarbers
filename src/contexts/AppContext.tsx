@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useCallback, useMemo } from 'react';
+import React, { createContext, useContext, useReducer, useCallback, useMemo, useEffect } from 'react';
 import type { NavigationTab, ContactFormData } from '../types';
 
 /**
@@ -33,14 +33,26 @@ type AppAction =
   | { type: 'RESET_CONTACT_DATA' };
 
 /**
+ * Get initial tab from URL hash
+ *
+ * @description Determines the initial tab based on URL hash for deep linking support.
+ * Falls back to 'home' if hash is invalid or missing.
+ */
+const getInitialTab = (): NavigationTab => {
+  const hash = window.location.hash.slice(1); // Remove the # character
+  const validTabs: NavigationTab[] = ['home', 'about', 'services', 'contact'];
+  return validTabs.includes(hash as NavigationTab) ? (hash as NavigationTab) : 'home';
+};
+
+/**
  * Initial Application State
- * 
+ *
  * @description Defines the default state values for application initialization.
  * Provides clean starting point with empty form data and inactive UI states
  * for consistent application bootstrap behavior.
  */
 const initialState: AppState = {
-  activeTab: 'home',
+  activeTab: getInitialTab(),
   mobileMenuOpen: false,
   contactData: {
     name: '',
@@ -175,6 +187,24 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
    */
   const setActiveTab = useCallback((tab: NavigationTab): void => {
     dispatch({ type: 'SET_ACTIVE_TAB', payload: tab });
+    window.location.hash = tab;
+  }, []);
+
+  /**
+   * Handle browser back/forward navigation
+   * @description Syncs application state with browser history changes
+   */
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.slice(1);
+      const validTabs: NavigationTab[] = ['home', 'about', 'services', 'contact'];
+      if (validTabs.includes(hash as NavigationTab)) {
+        dispatch({ type: 'SET_ACTIVE_TAB', payload: hash as NavigationTab });
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
   /**

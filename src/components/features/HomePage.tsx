@@ -11,6 +11,7 @@ import { useSEO, useStructuredData, SEO_CONFIGS, BUSINESS_STRUCTURED_DATA } from
 import Button from '../ui/Button';
 import Card from '../ui/Card';
 import BookingModal from '../ui/BookingModal';
+import StatsSection from '../ui/StatsSection';
 import styles from './css/HomePage.module.css';
 import heroImage from '../../assets/images/home/mpbarber-wide-view.webp';
 
@@ -175,33 +176,7 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* Stats Section */}
-      <section 
-        className="py-20 bg-white"
-        aria-label="Company statistics"
-      >
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-8 text-center">
-            <div>
-              <div className="text-4xl font-bold text-gray-900 mb-2" aria-label="500 plus happy clients">
-                500+
-              </div>
-              <p className="text-gray-600">Happy Clients in Malta</p>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-gray-900 mb-2" aria-label="Master barber with traditional barbering excellence">
-                1
-              </div>
-              <p className="text-gray-600">Master Barber</p>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-gray-900 mb-2" aria-label="5 star average rating">
-                5★
-              </div>
-              <p className="text-gray-600">Average Rating</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <StatsSection />
 
       <BookingModal
         isOpen={isBookingModalOpen}

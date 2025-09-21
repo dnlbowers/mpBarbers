@@ -5,11 +5,12 @@
 import React from 'react';
 import { TEAM_MEMBERS } from '../../constants';
 import Card from '../ui/Card';
+import StatsSection from '../ui/StatsSection';
 
 const AboutPage: React.FC = () => {
   return (
-    <div className="pt-20">
-      <section className="py-20 bg-white">
+    <div className="pt-15">
+      <section className="pt-20 bg-white">
         <div className="max-w-4xl mx-auto px-4">
           <h1 className="text-5xl font-bold text-center mb-8">
             MP BARBERSHOP
@@ -40,24 +41,12 @@ const AboutPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            <div className="text-center">
-              <div className="text-4xl font-bold text-gray-900 mb-2">500+</div>
-              <p className="text-gray-600">Happy Clients</p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-gray-900 mb-2">4</div>
-              <p className="text-gray-600">Expert Barbers</p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-gray-900 mb-2">5★</div>
-              <p className="text-gray-600">Average Rating</p>
-            </div>
-          </div>
         </div>
       </section>
 
-      <section className="py-20 bg-gray-50">
+      <StatsSection className="pt-5 pb-14" />
+
+      <section className="pt-12 pb-20 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-12">OUR TEAM</h2>
           <div className="grid md:grid-cols-4 gap-8">

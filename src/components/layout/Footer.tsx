@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
             </p>
             <p className="text-gray-400 text-xs mt-2">
               Founded by Mario Pulvirenti<br />
-              Crafted with Legacy, and Defined by Precision Since 2025
+              Crafted by Legacy, and Defined with Precision Since 2025
             </p>
           </div>
 

@@ -17,7 +17,7 @@ const AboutPage: React.FC = () => {
           </h1>
 
           <h2 className="text-2xl font-light text-center mb-12 text-gray-700 italic">
-            Crafted with Legacy, Defined by Precision.
+            Crafted by Legacy, Defined with Precision.
           </h2>
 
           <div className="prose prose-lg mx-auto mb-12">

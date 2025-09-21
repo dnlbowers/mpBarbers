@@ -64,13 +64,16 @@ const Navigation: React.FC = () => {
                 key={item.key}
                 onClick={() => handleNavigation(item.key)}
                 className={cn(
-                  'text-gray-700 hover:text-gray-900 transition-colors px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500',
+                  'relative text-gray-700 hover:text-gray-900 transition-all duration-200 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500',
                   activeTab === item.key && 'text-gray-900 font-semibold'
                 )}
                 aria-label={item.ariaLabel}
                 aria-current={activeTab === item.key ? 'page' : undefined}
               >
                 {item.label}
+                {activeTab === item.key && (
+                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gray-900 rounded-full" />
+                )}
               </button>
             ))}
           </div>
@@ -110,8 +113,8 @@ const Navigation: React.FC = () => {
               key={item.key}
               onClick={() => handleNavigation(item.key)}
               className={cn(
-                'block w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500',
-                activeTab === item.key && 'text-gray-900 font-semibold bg-gray-50'
+                'block w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 border-l-4 border-transparent',
+                activeTab === item.key && 'text-gray-900 font-semibold bg-gray-50 border-l-gray-900'
               )}
               aria-label={item.ariaLabel}
               aria-current={activeTab === item.key ? 'page' : undefined}

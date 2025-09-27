@@ -13,7 +13,6 @@ import Card from '../ui/Card';
 import BookingModal from '../ui/BookingModal';
 import StatsSection from '../ui/StatsSection';
 import styles from './css/HomePage.module.css';
-import heroImage from '../../assets/images/home/mpbarber-wide-view.webp';
 
 const HomePage: React.FC = () => {
   const { setActiveTab } = useApp();
@@ -36,9 +35,9 @@ const HomePage: React.FC = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section 
+      <section
         className={`relative flex items-center justify-center ${styles.heroSection}`}
-        style={{ '--hero-image': `url(${heroImage})` } as React.CSSProperties}
+        style={{ '--hero-image': `url(/images/home/mpbarber-wide-view.webp)` } as React.CSSProperties}
         aria-label="Hero section"
       >
         <div className={`text-center z-10 max-w-4xl mx-auto px-4 ${styles.heroContent}`}>
